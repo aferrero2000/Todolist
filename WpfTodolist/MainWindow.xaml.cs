@@ -24,5 +24,15 @@ namespace WpfTodolist
         {
             InitializeComponent();
         }
+
+        private void Label_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Label_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
