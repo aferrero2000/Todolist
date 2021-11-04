@@ -34,5 +34,11 @@ namespace WpfTodolist
         {
 
         }
+
+        private void Button_ex1_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 form = new Window1();
+            form.ShowDialog();
+        }
     }
 }
