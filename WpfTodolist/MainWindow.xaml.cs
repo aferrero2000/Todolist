@@ -25,16 +25,6 @@ namespace WpfTodolist
             InitializeComponent();
         }
 
-        private void Label_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Label_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_ex1_Click(object sender, RoutedEventArgs e)
         {
             Window1 form = new Window1();
