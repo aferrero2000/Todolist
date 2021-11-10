@@ -7,11 +7,11 @@ using System.Data.SQLite;
 
 namespace SQLiteExample.Service
 {
-    public class TascaService
+    public class PrioritatService
     {
-        public static IEnumerable<Tasca> GetAll()
+        public static IEnumerable<Prioritat> GetAll()
         {
-            var result = new List<Tasca>();
+            var result = new List<Prioritat>();
 
             using (var ctx = DbContext.GetInstance())
             {
@@ -23,15 +23,11 @@ namespace SQLiteExample.Service
                     {
                         while (reader.Read())
                         {
-                            result.Add(new Tasca
-                            { 
+                            result.Add(new Prioritat
+                            {
                                 Id = Convert.ToInt32(reader["id"].ToString()),
                                 Nom = reader["nom"].ToString(),
-                                Descripcio = reader["descipcio"].ToString(),
-                                Data_creacio = Convert.ToDateTime(reader["data_creacio"]),
-                                Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]),
-                                Responsable = Convert.ToInt32(reader["responsable"].ToString()),
-                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString()),
+                                Color = reader["color"].ToString(),
                             });
                         }
                     }
