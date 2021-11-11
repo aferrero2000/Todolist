@@ -7,7 +7,7 @@ namespace WpfTodolist.Persistence
     public class DbContext
     {
         private const string DBName = "database.sqlite";
-        private const string SQLScript = @"..\..\Util\database.sql";
+        private const string SQLScript = @"..\..\..\Util\database.sql";
         private static bool IsDbRecentlyCreated = false;
 
         public static void Up()

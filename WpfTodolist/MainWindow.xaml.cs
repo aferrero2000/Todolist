@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfTodolist.Persistence;
+using WpfTodolist.Service;
+using System.Diagnostics;
 
 namespace WpfTodolist
 {
@@ -20,9 +23,20 @@ namespace WpfTodolist
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            DbContext.Up();
+
+            foreach (var prioritat in PrioritatService.GetAll())
+            {
+                Trace.WriteLine(
+                    string.Format("#{0}: - {1}, {2}", prioritat.Id, prioritat.Nom, prioritat.Color)
+                );
+            }
+
+            Console.Read();
         }
 
         private void Button_ex1_Click(object sender, RoutedEventArgs e)

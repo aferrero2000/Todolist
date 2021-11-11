@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
-namespace SQLiteExample.Service
+namespace WpfTodolist.Service
 {
     public class PrioritatService
     {
@@ -15,7 +15,7 @@ namespace SQLiteExample.Service
 
             using (var ctx = DbContext.GetInstance())
             {
-                var query = "SELECT * FROM Tasca";
+                var query = "SELECT * FROM Prioritat";
 
                 using (var command = new SQLiteCommand(query, ctx))
                 {
@@ -25,9 +25,9 @@ namespace SQLiteExample.Service
                         {
                             result.Add(new Prioritat
                             {
-                                Id = Convert.ToInt32(reader["id"].ToString()),
-                                Nom = reader["nom"].ToString(),
-                                Color = reader["color"].ToString(),
+                                Id = Convert.ToInt32(reader["ID"].ToString()),
+                                Nom = reader["Nom"].ToString(),
+                                Color = reader["Color"].ToString(),
                             });
                         }
                     }
