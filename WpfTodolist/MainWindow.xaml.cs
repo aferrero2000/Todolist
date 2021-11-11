@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfTodolist.Persistence;
+using WpfTodolist.Persistance;
 using WpfTodolist.Service;
 using System.Diagnostics;
 
@@ -35,8 +35,6 @@ namespace WpfTodolist
                     string.Format("#{0}: - {1}, {2}", prioritat.Id, prioritat.Nom, prioritat.Color)
                 );
             }
-
-            Console.Read();
         }
 
         private void Button_ex1_Click(object sender, RoutedEventArgs e)

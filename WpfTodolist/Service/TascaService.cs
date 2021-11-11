@@ -1,11 +1,11 @@
 ﻿using WpfTodolist.Entity;
-using WpfTodolist.Persistence;
+using WpfTodolist.Persistance;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
-namespace SQLiteExample.Service
+namespace WpfTodolist.Service
 {
     public class TascaService
     {

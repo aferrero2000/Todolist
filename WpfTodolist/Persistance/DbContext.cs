@@ -2,11 +2,11 @@
 using System.Data.SQLite;
 using System.IO;
 
-namespace WpfTodolist.Persistence
+namespace WpfTodolist.Persistance
 {
     public class DbContext
     {
-        private const string DBName = "database.sqlite";
+        private const string DBName = @"database.sqlite";
         private const string SQLScript = @"..\..\..\Util\database.sql";
         private static bool IsDbRecentlyCreated = false;
 
