@@ -24,11 +24,16 @@ namespace WpfTodolist
     public partial class MainWindow : Window
     {
 
+
+
         public MainWindow()
         {
             InitializeComponent();
-            DbContext.Up();
+            DbContext.Up(); //Si la base de dades no existeix, no executarà el codi posterior. (ara si funciona però no sé com ho he solucionat)
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             foreach (var prioritat in PrioritatService.GetAll())
             {
                 Trace.WriteLine(
@@ -42,5 +47,7 @@ namespace WpfTodolist
             Window1 form = new Window1();
             form.ShowDialog();
         }
+
+
     }
 }
