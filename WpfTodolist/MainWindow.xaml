@@ -30,9 +30,7 @@
 
 
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0">
-            <Button>My BUtton 1</Button>
-            <Label HorizontalAlignment="Center">My label</Label>
-            <Button>My Button 2</Button>
+            <TextBlock HorizontalAlignment="Stretch" TextWrapping="WrapWithOverflow"><Run FontSize="16" FontWeight="Bold">Nom: Crear base de dades </Run><LineBreak/> Descripció: Crear la base de dades per procesar les vendes dels productes <LineBreak/> Data: .........</TextBlock>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="2">

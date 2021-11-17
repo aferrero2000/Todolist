@@ -15,7 +15,7 @@ namespace WpfTodolist.Service
 
             using (var ctx = DbContext.GetInstance())
             {
-                var query = "SELECT * FROM Tasca";
+                var query = "SELECT * FROM Responsable";
 
                 using (var command = new SQLiteCommand(query, ctx))
                 {
@@ -26,15 +26,53 @@ namespace WpfTodolist.Service
                             result.Add(new Responsable
                             { 
                                 Id = Convert.ToInt32(reader["id"].ToString()),
-                                Nom = reader["nom"].ToString(),
+                                Nom = reader["nom"].ToString()
                             });
                         }
                     }
                 }
             }
 
+            return result;
+        }
+
+        public static Responsable GetOne(int identificador)
+        {
+            var result = new Responsable();
+
+            using (var ctx = DbContext.GetInstance())
+            {
+                var query = "SELECT * FROM Responsable WHERE id = " + identificador;
+
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Id = Convert.ToInt32(reader["id"].ToString());
+                            result.Nom = reader["nom"].ToString();
+                        }
+                    }
+                }
+            }
 
             return result;
+        }
+
+        public static void SetOne(Responsable responsable)
+        {
+            using (var ctx = DbContext.GetInstance())
+            {
+                var query = "INSERT INTO Responsable (nom) VALUES (?)";
+
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("nom", responsable.Nom));
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

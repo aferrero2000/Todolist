@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfTodolist.Persistance;
 using WpfTodolist.Service;
+using WpfTodolist.Entity;
 using System.Diagnostics;
 
 namespace WpfTodolist
@@ -40,6 +41,10 @@ namespace WpfTodolist
                     string.Format("#{0}: - {1}, {2}", prioritat.Id, prioritat.Nom, prioritat.Color)
                 );
             }
+
+            Responsable responsable = new Responsable();
+            responsable.Nom = "Robert";
+            ResponsableService.SetOne(responsable);
         }
 
         private void Button_ex1_Click(object sender, RoutedEventArgs e)
