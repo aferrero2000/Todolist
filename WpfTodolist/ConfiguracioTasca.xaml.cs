@@ -9,11 +9,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfTodolist.Persistance;
-using WpfTodolist.Service;
-using WpfTodolist.Entity;
-using System.Diagnostics;
-using System.Globalization;
 
 namespace WpfTodolist
 {
@@ -26,33 +21,5 @@ namespace WpfTodolist
         {
             InitializeComponent();
         }
-        private void Button_Guardar_Click(object sender, RoutedEventArgs e)
-        {
-            string caption = "Informació";
-            MessageBox.Show(nom_tasca.Text + descripcio.Text, caption, MessageBoxButton.OK, MessageBoxImage.Information);
-            Tasca tasca = new Tasca();
-            Responsable responsable = new Responsable();
-
-            tasca.Nom = nom_tasca.Text;
-            tasca.Nom = descripcio.Text;
-            tasca.Prioritat = 1;
-            DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
-            tasca.Data_creacio = datacreacio;
-            DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacío.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
-            tasca.Data_finalitzacio = datafinal;
-
-            responsable.Nom = responsablee.Text;
-
-
-            TascaService.SetOne(tasca);
-
-
-
-
-
-    //        command.Parameters.Add(new SQLiteParameter("prioritat", tasca.Prioritat));
-        }
     }
-
-
 }

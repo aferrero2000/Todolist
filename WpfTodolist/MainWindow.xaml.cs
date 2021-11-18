@@ -33,9 +33,18 @@ namespace WpfTodolist
             DbContext.Up(); //Si la base de dades no existeix, no executarà el codi posterior. (ara si funciona però no sé com ho he solucionat)
         }
 
-       private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-         //   ListToDo.ItemsSource = TascaService.GetAll();
+            foreach (var prioritat in PrioritatService.GetAll())
+            {
+                Trace.WriteLine(
+                    string.Format("#{0}: - {1}, {2}", prioritat.Id, prioritat.Nom, prioritat.Color)
+                );
+            }
+
+            Responsable responsable = new Responsable();
+            responsable.Nom = "Robert";
+            ResponsableService.SetOne(responsable);
         }
 
         private void Button_ex1_Click(object sender, RoutedEventArgs e)
