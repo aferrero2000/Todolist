@@ -90,5 +90,39 @@ namespace WpfTodolist.Service
                 }
             }
         }
+
+        public static void Update(Tasca tasca)
+        {
+            using (var ctx = DbContext.GetInstance())
+            {
+                string query = "UPDATE Tasca SET nom = ?, descripcio = ?, data_creacio = ? data_finalitzacio = ? responsable = ? prioritat = ?";
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("nom", tasca.Nom));
+                    command.Parameters.Add(new SQLiteParameter("descripcio", tasca.Descripcio));
+                    command.Parameters.Add(new SQLiteParameter("data_creacio", tasca.Data_creacio));
+                    command.Parameters.Add(new SQLiteParameter("data_finalitzacio", tasca.Data_finalitzacio));
+                    command.Parameters.Add(new SQLiteParameter("responsable", tasca.Responsable));
+                    command.Parameters.Add(new SQLiteParameter("prioritat", tasca.Prioritat));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        //ID de el que es vol eliminar
+        public static void Delete(int Id)
+        {
+            using (var ctx = DbContext.GetInstance())
+            {
+                string query = "DELETE FROM Users WHERE Id = ?";
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("", Id));
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

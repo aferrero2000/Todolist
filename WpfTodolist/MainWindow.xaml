@@ -29,9 +29,27 @@
         <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">Done</Label>
 
 
-        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0">
-            <TextBlock HorizontalAlignment="Stretch" TextWrapping="WrapWithOverflow"><Run FontSize="16" FontWeight="Bold">Nom: Crear base de dades </Run><LineBreak/> Descripció: Crear la base de dades per procesar les vendes dels productes <LineBreak/> Data: .........</TextBlock>
-        </StackPanel>
+        <!--
+        <ListBox Name="ListToDo" Grid.Row="1" Grid.Column="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Nom}">
+                        </TextBlock>
+                        <TextBlock Text="{Binding Descripcio}">
+                        </TextBlock>
+                        <DatePicker SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
+                        <DatePicker SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
+                        <TextBlock Text="{Binding Responsable}">
+                        </TextBlock>
+                        <TextBlock Text="{Binding Prioritat}">
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>   
+             </ListBox.ItemTemplate>
+        </ListBox>
+        -->
+
 
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="2">
             <Button>My BUtton 1</Button>
