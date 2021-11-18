@@ -35,8 +35,18 @@ namespace WpfTodolist
 
        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-         //   ListToDo.ItemsSource = TascaService.GetAll();
+ /*           foreach (var prioritat in TascaService.GetAll())
+            {
+                Trace.WriteLine(
+                    string.Format("#{0}: - {1}, {2}", prioritat.Id, prioritat.Nom)
+                );
+            }*/
         }
+
+
+
+
+        //   ListToDo.ItemsSource = TascaService.GetAll();
 
         private void Button_ex1_Click(object sender, RoutedEventArgs e)
         {

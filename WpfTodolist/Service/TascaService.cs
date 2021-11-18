@@ -28,10 +28,10 @@ namespace WpfTodolist.Service
                                 Id = Convert.ToInt32(reader["id"].ToString()),
                                 Nom = reader["nom"].ToString(),
                                 Descripcio = reader["descipcio"].ToString(),
-                                Data_creacio = Convert.ToDateTime(reader["data_creacio"]),
-                                Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]),
+     //                           Data_creacio = Convert.ToDateTime(reader["data_creacio"]),
+    //                            Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]),
                                 Responsable = Convert.ToInt32(reader["responsable"].ToString()),
-                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString()),
+                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString())
                             });
                         }
                     }

@@ -41,7 +41,7 @@ namespace WpfTodolist
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacío.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
 
-            responsable.Nom = responsablee.Text;
+            //responsable.Nom = responsablee.Text;
 
 
             TascaService.SetOne(tasca);

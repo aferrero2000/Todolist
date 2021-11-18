@@ -14,9 +14,9 @@
         <Label Name="lbl_data_de_creacio" Content="Data de creació:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,0,0,0"/>
         <TextBox Name="data_de_creacio" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,0,0,0"/>
         <Label Name="lbl_data_prevista_de_finalitzacio" Content="Data de finalització:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,60,0,0"/>
-        <TextBox Name="data_prevista_de_finalitzacío" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,120,0,0"/>
+        <TextBox Name="responsablee" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,120,0,0"/>
         <Label Name="lbl_responsable" Content="Responsable:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,120,0,0"/>
-        <TextBox Name="responsablee" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,60,0,0"/>
+        <TextBox Name="data_prevista_de_finalitzacío" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,60,0,0"/>
 
         <Label Name="lbl_prioritat" Content="Prioritat:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,180,0,0"/>
         <ComboBox Height="20" Width="239" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,180,0,0">
