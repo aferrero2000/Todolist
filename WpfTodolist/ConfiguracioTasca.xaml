@@ -5,36 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    <Grid>
-        <Label Name="lbl_nom_tasca" Content="Nom:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,-120,0,0"/>
-        <TextBox Name="nom_tasca" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,-120,0,0"/>
-        <Label Name="lbl_descripcio" Content="Descripció:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,-60,0,0"/>
-        <TextBox Name="descripcio" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,-60,0,0"/>
-        <Label Name="lbl_data_de_creacio" Content="Data de creació:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,0,0,0"/>
+        Title="Window1" Height="300" Width="550">
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <DatePicker Name="data_de_creacio" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,0,0,0" SelectedDateFormat="Short" IsEnabled="True"></DatePicker>
-       
-        
-        
-        <Label Name="lbl_data_prevista_de_finalitzacio" Content="Data de finalització:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,60,0,0"/>
-        <TextBox Name="responsablee" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,120,0,0"/>
-        <Label Name="lbl_responsable" Content="Responsable:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,120,0,0"/>
-        <DatePicker Name="data_prevista_de_finalitzacío" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="239" Margin="80,60,0,0" SelectedDateFormat="Short" IsEnabled="True"></DatePicker>
+        <Label Name="lbl_nom_tasca" Content="Nom:" Grid.Row="0" Grid.Column="0"/>
+        <TextBox Name="nom_tasca" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5"/>
+        <Label Name="lbl_descripcio" Content="Descripció:" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Name="descripcio" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5"/>
+        <Label Name="lbl_data_de_creacio" Content="Data de creació:" Grid.Row="2" Grid.Column="0"/>
+        <DatePicker Name="data_de_creacio" SelectedDateFormat="Short" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5"/>
+        <Label Name="lbl_data_prevista_de_finalitzacio" Content="Data de finalització:" Grid.Row="3" Grid.Column="0"/>
+        <DatePicker Name="responsablee" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5"/>
+        <Label Name="lbl_responsable" Content="Responsable:" Grid.Row="4" Grid.Column="0"/>
+        <TextBox Name="data_prevista_de_finalitzacío" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5"/>
 
-
-        <Label Name="lbl_prioritat" Content="Prioritat:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="104" Margin="-255,180,0,0"/>
-        <ComboBox Height="20" Width="239" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,180,0,0">
+        <Label Name="lbl_prioritat" Content="Prioritat:" Grid.Row="5" Grid.Column="0"/>
+        <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5">
             <ComboBoxItem>Alta</ComboBoxItem>
+            <ComboBoxItem>Mitja</ComboBoxItem>
             <ComboBoxItem>Baixa</ComboBoxItem>
-            <ComboBoxItem>aaa</ComboBoxItem>
         </ComboBox>
 
-            <Button Name="btn_eliminar" Content="Eliminar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="68" Margin="250,240,0,0"/>
-        <Button Name="btn_guardar" Content="Guardar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="68" Margin="80,240,0,0" Click="Button_Guardar_Click"/>
-
-
-        <Button Name="btn_cancelar" Content="Cancelar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="68" Margin="-90,240,0,0"/>
-        
+        <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5"/>
+        <Button Name="btn_eliminar" Content="Eliminar" Grid.Row="6" Grid.Column="1" Margin="5"/>
+        <Button Name="btn_guardar" Content="Guardar" Grid.Row="6" Grid.Column="2" Margin="5" Click="Button_Guardar_Click"/>
     </Grid>
 </Window>

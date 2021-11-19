@@ -53,7 +53,7 @@ namespace WpfTodolist.Persistance
 
                     for (var i = 1; i <= 10; i++)//Tasca
                     {
-                        var query = "INSERT INTO Tasca (nom, descripcio, data_creacio, data_finalitzacio, responsable, prioritat) VALUES (?, ?, ?, ?, ?, ?)";
+                        var query = "INSERT INTO Tasca (nom, descripcio, data_creacio, data_finalitzacio, responsable, prioritat, estat) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                         using (var command = new SQLiteCommand(query, ctx))
                         {
@@ -64,16 +64,11 @@ namespace WpfTodolist.Persistance
                             command.Parameters.Add(new SQLiteParameter("data_finalitzacio", DateTime.Today.AddDays(rand.Next(2,7))));
                             command.Parameters.Add(new SQLiteParameter("responsable", "Responsable " + i));
                             command.Parameters.Add(new SQLiteParameter("prioritat", "Prioritat " + i));
+                            command.Parameters.Add(new SQLiteParameter("estat", "ToDo"));
 
                             command.ExecuteNonQuery();
                         }
                     }
-
-
-
-
-
-
                 }
             }
         }

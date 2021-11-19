@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS Tasca (
 	Data_finalitzacio DATE NOT NULL,
 	Responsable INTEGER,
 	Prioritat INTEGER,
+	Estat TEXT CHECK(Estat IN ('ToDo', 'Doing', 'Done')) NOT NULL,
 	FOREIGN KEY(Prioritat) REFERENCES Prioritat(ID),
 	FOREIGN KEY(Responsable) REFERENCES Responsable(ID)
 );
