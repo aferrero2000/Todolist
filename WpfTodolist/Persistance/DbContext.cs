@@ -39,21 +39,7 @@ namespace WpfTodolist.Persistance
                         }
                     }
 
-                    for (var i = 1; i <= 100; i++)//Prioritat
-                    {
-                        var query = "INSERT INTO Prioritat (nom, color) VALUES (?, ?)";
-
-                        using (var command = new SQLiteCommand(query, ctx))
-                        {
-                            command.Parameters.Add(new SQLiteParameter("nom", "Nom " + i));
-                            command.Parameters.Add(new SQLiteParameter("color", "Color " + i));
-//                            var rnd = new Random();
-//                            command.Parameters.Add(new SQLiteParameter("birthday", DateTime.Today.AddYears(-rnd.Next(1, 50))));
-                            command.ExecuteNonQuery();
-                        }
-                    }
-
-                    for (var i = 1; i <= 100; i++)//Responsable
+                    for (var i = 1; i <= 10; i++)//Responsable
                     {
                         var query = "INSERT INTO Responsable (nom) VALUES (?)";
 
@@ -65,7 +51,7 @@ namespace WpfTodolist.Persistance
                         }
                     }
 
-                    for (var i = 1; i <= 100; i++)//Tasca
+                    for (var i = 1; i <= 10; i++)//Tasca
                     {
                         var query = "INSERT INTO Tasca (nom, descripcio, data_creacio, data_finalitzacio, responsable, prioritat) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -73,8 +59,9 @@ namespace WpfTodolist.Persistance
                         {
                             command.Parameters.Add(new SQLiteParameter("nom", "Nom " + i));
                             command.Parameters.Add(new SQLiteParameter("descripcio", "Descripcio " + i));
-                            command.Parameters.Add(new SQLiteParameter("data_creacio", "Data creació " + i));
-                            command.Parameters.Add(new SQLiteParameter("data_finalitzacio", "Data finalització " + i));
+                            command.Parameters.Add(new SQLiteParameter("data_creacio", DateTime.Today));
+                            var rand = new Random();
+                            command.Parameters.Add(new SQLiteParameter("data_finalitzacio", DateTime.Today.AddDays(rand.Next(2,7))));
                             command.Parameters.Add(new SQLiteParameter("responsable", "Responsable " + i));
                             command.Parameters.Add(new SQLiteParameter("prioritat", "Prioritat " + i));
 
