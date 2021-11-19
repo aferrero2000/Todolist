@@ -46,6 +46,7 @@ namespace WpfTodolist
         {
             Window1 form = new Window1();
             form.ShowDialog();
+            ListToDo.ItemsSource = TascaService.GetAll();
         }
 
 

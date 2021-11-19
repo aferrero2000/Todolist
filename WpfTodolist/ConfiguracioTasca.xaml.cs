@@ -34,7 +34,7 @@ namespace WpfTodolist
             Responsable responsable = new Responsable();
 
             tasca.Nom = nom_tasca.Text;
-            tasca.Nom = descripcio.Text;
+            tasca.Descripcio = descripcio.Text;
             tasca.Prioritat = 1;
             DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_creacio = datacreacio;
@@ -45,6 +45,7 @@ namespace WpfTodolist
 
 
             TascaService.SetOne(tasca);
+
 
 
 
