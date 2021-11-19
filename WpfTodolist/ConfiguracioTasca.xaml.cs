@@ -40,18 +40,13 @@ namespace WpfTodolist
             tasca.Data_creacio = datacreacio;
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacío.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
+            tasca.Estat = "ToDo";
 
-            //responsable.Nom = responsablee.Text;
+            responsable.Nom = responsablee.Text;
 
 
             TascaService.SetOne(tasca);
-
-
-
-
-
-
-    //        command.Parameters.Add(new SQLiteParameter("prioritat", tasca.Prioritat));
+            ResponsableService.SetOne(responsable);
         }
     }
 

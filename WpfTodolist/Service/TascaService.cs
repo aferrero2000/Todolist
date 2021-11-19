@@ -31,7 +31,8 @@ namespace WpfTodolist.Service
                                 Data_creacio = Convert.ToDateTime(reader["data_creacio"]),
                                 Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]),
                                 Responsable = Convert.ToInt32(reader["responsable"].ToString()),
-                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString())
+                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString()),
+                                Estat = reader["estat"].ToString()
                             });
                         }
                     }

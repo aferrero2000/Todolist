@@ -13,5 +13,6 @@ namespace WpfTodolist.Entity
         public DateTime Data_finalitzacio { get; set; }
         public int Responsable { get; set; }
         public int Prioritat { get; set; }
+        public string Estat { get; set; }
     }
 }
