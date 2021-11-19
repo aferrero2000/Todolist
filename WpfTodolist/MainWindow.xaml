@@ -28,41 +28,50 @@
         <Button Name="done_doing" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Padding="5,0,5,0">←</Button>
         <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">Done</Label>
 
-
-        <!--
         <ListBox Name="ListToDo" Grid.Row="1" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Nom}">
-                        </TextBlock>
-                        <TextBlock Text="{Binding Descripcio}">
-                        </TextBlock>
+                        <TextBlock Text="{Binding Nom}"></TextBlock>
+                        <TextBlock Text="{Binding Descripcio}"></TextBlock>
                         <DatePicker SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
                         <DatePicker SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
-                        <TextBlock Text="{Binding Responsable}">
-                        </TextBlock>
-                        <TextBlock Text="{Binding Prioritat}">
-                        </TextBlock>
+                        <TextBlock Text="{Binding Responsable}"></TextBlock>
+                        <TextBlock Text="{Binding Prioritat}"></TextBlock>
                     </StackPanel>
-                </DataTemplate>   
-             </ListBox.ItemTemplate>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
-        -->
-
-
-        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="2">
-            <Button>My BUtton 1</Button>
-            <Label HorizontalAlignment="Center">My label</Label>
-            <Button>My Button 2</Button>
-        </StackPanel>
-
-        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="4">
-            <Button>My BUtton 1</Button>
-            <Label HorizontalAlignment="Center">My label</Label>
-            <Button>My Button 2</Button>
-        </StackPanel>
-
+        
+        <ListBox Name="ListDoing" Grid.Row="1" Grid.Column="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Nom}"></TextBlock>
+                        <TextBlock Text="{Binding Descripcio}"></TextBlock>
+                        <DatePicker SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
+                        <DatePicker SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
+                        <TextBlock Text="{Binding Responsable}"></TextBlock>
+                        <TextBlock Text="{Binding Prioritat}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <ListBox Name="ListDomne" Grid.Row="1" Grid.Column="4">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Nom}"></TextBlock>
+                        <TextBlock Text="{Binding Descripcio}"></TextBlock>
+                        <DatePicker SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
+                        <DatePicker SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
+                        <TextBlock Text="{Binding Responsable}"></TextBlock>
+                        <TextBlock Text="{Binding Prioritat}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </Window>
