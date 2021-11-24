@@ -51,6 +51,17 @@ namespace WpfTodolist
             ListToDo.ItemsSource = TascaService.GetAll();
         }
 
+        private void Modificar_Click(object sender, RoutedEventArgs e)
+        {
+            Button boto = (Button)sender;
+            Window1 form = new Window1(boto.Tag.ToString());
+            form.ShowDialog();
+            ListToDo.ItemsSource = TascaService.GetAll();
+        }
 
+        private void todo_doing_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox("");
+        }
     }
 }

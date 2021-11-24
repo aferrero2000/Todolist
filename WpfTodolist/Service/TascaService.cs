@@ -93,7 +93,7 @@ namespace WpfTodolist.Service
                         {
                             result.Id = Convert.ToInt32(reader["id"].ToString());
                             result.Nom = reader["nom"].ToString();
-                            result.Descripcio = reader["descipcio"].ToString();
+                            result.Descripcio = reader["descripcio"].ToString();
                             result.Data_creacio = Convert.ToDateTime(reader["data_creacio"]);
                             result.Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]);
                             result.Responsable = Convert.ToInt32(reader["responsable"].ToString());
@@ -142,6 +142,26 @@ namespace WpfTodolist.Service
                     command.Parameters.Add(new SQLiteParameter("responsable", tasca.Responsable));
                     command.Parameters.Add(new SQLiteParameter("prioritat", tasca.Prioritat));
                     command.Parameters.Add(new SQLiteParameter("estat", tasca.Estat));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        public static void UpdateNoEstat(Tasca tasca)
+        {
+            using (var ctx = DbContext.GetInstance())
+            {
+                string query = "UPDATE Tasca SET nom = ?, descripcio = ?, data_creacio = ?, data_finalitzacio = ?, responsable = ?, prioritat = ?";
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("nom", tasca.Nom));
+                    command.Parameters.Add(new SQLiteParameter("descripcio", tasca.Descripcio));
+                    command.Parameters.Add(new SQLiteParameter("data_creacio", tasca.Data_creacio));
+                    command.Parameters.Add(new SQLiteParameter("data_finalitzacio", tasca.Data_finalitzacio));
+                    command.Parameters.Add(new SQLiteParameter("responsable", tasca.Responsable));
+                    command.Parameters.Add(new SQLiteParameter("prioritat", tasca.Prioritat));
 
                     command.ExecuteNonQuery();
                 }

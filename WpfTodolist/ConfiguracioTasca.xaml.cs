@@ -22,9 +22,26 @@ namespace WpfTodolist
     /// </summary>
     public partial class Window1 : Window
     {
+        bool novatasca;
         public Window1()
         {
+            novatasca = true;
             InitializeComponent();
+        }
+
+        public Window1(String ID)
+        {
+            novatasca = false;
+            InitializeComponent();
+
+            Tasca tasco = TascaService.GetOne(Convert.ToInt32(ID));
+            Responsable responsablo = ResponsableService.GetOne(Convert.ToInt32(tasco.Responsable));
+            nom_tasca.Text = tasco.Nom;
+            descripcio.Text = tasco.Descripcio;
+            data_de_creacio.SelectedDate = tasco.Data_creacio;
+            data_prevista_de_finalitzacío.SelectedDate = tasco.Data_finalitzacio;
+            responsablee.Text = responsablo.Nom;
+            prioritata.SelectedIndex = tasco.Prioritat-1;
         }
         private void Button_Guardar_Click(object sender, RoutedEventArgs e)
         {
@@ -40,15 +57,26 @@ namespace WpfTodolist
             tasca.Data_creacio = datacreacio;
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacío.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
-            tasca.Estat = "ToDo";
+
+            if (novatasca)
+            {
+                tasca.Estat = "ToDo";
+                TascaService.SetOne(tasca);
+                ResponsableService.SetOne(responsable);
+            }
+            else
+            {
+                TascaService.UpdateNoEstat(tasca);
+                ResponsableService.Update(responsable);
+            }
 
             responsable.Nom = responsablee.Text;
-
-
-            TascaService.SetOne(tasca);
-            ResponsableService.SetOne(responsable);
         }
-    }
+
+        private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
+        {
+            Window1.Close(); //NOSE
+        }
 
 
 }

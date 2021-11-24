@@ -35,13 +35,13 @@
         <TextBox Name="responsablee" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
 
         <Label Name="lbl_prioritat" Content="Prioritat:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <ComboBox Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5">
+        <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5">
             <ComboBoxItem>Alta</ComboBoxItem>
             <ComboBoxItem>Mitja</ComboBoxItem>
             <ComboBoxItem>Baixa</ComboBoxItem>
         </ComboBox>
 
-        <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5,5,5,5" Grid.ColumnSpan="2"/>
+        <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5,5,5,5" Grid.ColumnSpan="2" Click="Button_Cancelar_Click" IsCancel="True"/>
         <Button Name="btn_eliminar" Content="Eliminar" Grid.Row="6" Grid.Column="2" Margin="5,5,5,5"/>
         <Button Name="btn_guardar" Content="Guardar" Grid.Row="6" Grid.Column="3" Margin="5,5,5,5" Click="Button_Guardar_Click"/>
     </Grid>

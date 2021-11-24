@@ -42,10 +42,11 @@ namespace WpfTodolist.Service
 
             using (var ctx = DbContext.GetInstance())
             {
-                var query = "SELECT * FROM Responsable WHERE id = " + identificador;
+                var query = "SELECT * FROM Responsable WHERE id = ?";
 
                 using (var command = new SQLiteCommand(query, ctx))
                 {
+                    command.Parameters.Add(new SQLiteParameter("id", identificador));
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -73,6 +74,21 @@ namespace WpfTodolist.Service
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        public static void Update(Responsable responsable)
+        {
+            using (var ctx = DbContext.GetInstance())
+            {
+                string query = "UPDATE Responsable SET nom = ?";
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("nom", responsable.Nom));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
         }
     }
 }
