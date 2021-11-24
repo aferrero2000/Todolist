@@ -64,6 +64,7 @@ namespace WpfTodolist.Service
                             result.Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]);
                             result.Responsable = Convert.ToInt32(reader["responsable"].ToString());
                             result.Prioritat = Convert.ToInt32(reader["prioritat"].ToString());
+                            result.Estat = reader["estat"].ToString();
                         }
                     }
                 }
@@ -76,7 +77,7 @@ namespace WpfTodolist.Service
         {
             using (var ctx = DbContext.GetInstance())
             {
-                var query = "INSERT INTO Tasca (nom, descripcio, data_creacio, data_finalitzacio, responsable, prioritat) VALUES (?, ?, ?, ?, ?, ?)";
+                var query = "INSERT INTO Tasca (nom, descripcio, data_creacio, data_finalitzacio, responsable, prioritat, estat) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                 using (var command = new SQLiteCommand(query, ctx))
                 {
@@ -86,6 +87,7 @@ namespace WpfTodolist.Service
                     command.Parameters.Add(new SQLiteParameter("data_finalitzacio", tasca.Data_finalitzacio));
                     command.Parameters.Add(new SQLiteParameter("responsable", tasca.Responsable));
                     command.Parameters.Add(new SQLiteParameter("prioritat", tasca.Prioritat));
+                    command.Parameters.Add(new SQLiteParameter("estat", tasca.Estat));
 
                     command.ExecuteNonQuery();
                 }
@@ -96,7 +98,7 @@ namespace WpfTodolist.Service
         {
             using (var ctx = DbContext.GetInstance())
             {
-                string query = "UPDATE Tasca SET nom = ?, descripcio = ?, data_creacio = ? data_finalitzacio = ? responsable = ? prioritat = ?";
+                string query = "UPDATE Tasca SET nom = ?, descripcio = ?, data_creacio = ?, data_finalitzacio = ?, responsable = ?, prioritat = ?, estat = ?";
                 using (var command = new SQLiteCommand(query, ctx))
                 {
                     command.Parameters.Add(new SQLiteParameter("nom", tasca.Nom));
@@ -105,6 +107,7 @@ namespace WpfTodolist.Service
                     command.Parameters.Add(new SQLiteParameter("data_finalitzacio", tasca.Data_finalitzacio));
                     command.Parameters.Add(new SQLiteParameter("responsable", tasca.Responsable));
                     command.Parameters.Add(new SQLiteParameter("prioritat", tasca.Prioritat));
+                    command.Parameters.Add(new SQLiteParameter("estat", tasca.Estat));
 
                     command.ExecuteNonQuery();
                 }
