@@ -59,7 +59,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <ListBox Name="ListDomne" Grid.Row="1" Grid.Column="4">
+        <ListBox Name="ListDone" Grid.Row="1" Grid.Column="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

@@ -35,7 +35,9 @@ namespace WpfTodolist
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ListToDo.ItemsSource = TascaService.GetAll();
+            ListToDo.ItemsSource = TascaService.GetAll("ToDo");
+            ListDoing.ItemsSource = TascaService.GetAll("Doing");
+            ListDone.ItemsSource = TascaService.GetAll("Done");
         }
 
 

@@ -39,6 +39,40 @@ namespace WpfTodolist.Service
                 }
             }
 
+            return result;
+        }
+
+        public static IEnumerable<Tasca> GetAll(String estat)
+        {
+            var result = new List<Tasca>();
+
+            using (var ctx = DbContext.GetInstance())
+            {
+                var query = "SELECT * FROM Tasca WHERE Estat = ?";
+
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("estat", estat));
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(new Tasca
+                            {
+                                Id = Convert.ToInt32(reader["id"].ToString()),
+                                Nom = reader["nom"].ToString(),
+                                Descripcio = reader["descripcio"].ToString(),
+                                Data_creacio = Convert.ToDateTime(reader["data_creacio"]),
+                                Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]),
+                                Responsable = Convert.ToInt32(reader["responsable"].ToString()),
+                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString()),
+                                Estat = reader["estat"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
 
             return result;
         }
