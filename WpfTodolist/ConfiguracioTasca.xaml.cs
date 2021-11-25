@@ -36,7 +36,7 @@ namespace WpfTodolist
             InitializeComponent();
 
             Tasca tasco = TascaService.GetOne(Convert.ToInt32(ID));
-            Responsable responsablo = ResponsableService.GetOne(Convert.ToInt32(tasco.Responsable));
+            Responsable responsablo = ResponsableService.GetOne(Convert.ToInt32(tasco.Id));
             nom_tasca.Text = tasco.Nom;
             descripcio.Text = tasco.Descripcio;
             data_de_creacio.SelectedDate = tasco.Data_creacio;
