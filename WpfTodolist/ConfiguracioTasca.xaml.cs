@@ -41,7 +41,9 @@ namespace WpfTodolist
             data_de_creacio.SelectedDate = tasco.Data_creacio;
             data_prevista_de_finalitzacío.SelectedDate = tasco.Data_finalitzacio;
             responsablee.Text = responsablo.Nom;
-            prioritata.SelectedIndex = tasco.Prioritat-1;
+            prioritata.SelectedIndex = tasco.Prioritat - 1;
+            ID_Binding.Content = ID;
+
         }
         private void Button_Guardar_Click(object sender, RoutedEventArgs e)
         {
@@ -57,6 +59,7 @@ namespace WpfTodolist
             tasca.Data_creacio = datacreacio;
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacío.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
+            responsable.Nom = responsablee.Text;
 
             if (novatasca)
             {
@@ -66,17 +69,18 @@ namespace WpfTodolist
             }
             else
             {
+                tasca.Id = Convert.ToInt32(ID_Binding.Content);
                 TascaService.UpdateNoEstat(tasca);
                 ResponsableService.Update(responsable);
             }
 
-            responsable.Nom = responsablee.Text;
         }
 
         private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
         {
-            Window1.Close(); //NOSE
+            Close(); //NOSE
         }
 
 
+    }
 }
