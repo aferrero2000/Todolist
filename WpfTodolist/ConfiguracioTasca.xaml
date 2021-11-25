@@ -33,6 +33,7 @@
         <DatePicker Name="data_prevista_de_finalitzacío" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
         <Label Name="lbl_responsable" Content="Responsable:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <TextBox Name="responsablee" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <Button Name="ID_Binding" Visibility="Hidden" Content="{Binding ID}"></Button>
 
         <Label Name="lbl_prioritat" Content="Prioritat:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5">
