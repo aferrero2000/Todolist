@@ -27,6 +27,7 @@ namespace WpfTodolist
         {
             novatasca = true;
             InitializeComponent();
+            btn_eliminar.Visibility = System.Windows.Visibility.Hidden;
         }
 
         public Window1(String ID)
@@ -73,6 +74,8 @@ namespace WpfTodolist
                 TascaService.UpdateNoEstat(tasca);
                 ResponsableService.Update(responsable);
             }
+            
+            responsable.Nom = responsablee.Text;
 
         }
 
