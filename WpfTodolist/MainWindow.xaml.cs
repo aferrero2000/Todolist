@@ -61,7 +61,7 @@ namespace WpfTodolist
 
         private void todo_doing_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox("");
+            MessageBox.Show("");
         }
     }
 }
