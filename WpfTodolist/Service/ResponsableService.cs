@@ -105,10 +105,11 @@ namespace WpfTodolist.Service
         {
             using (var ctx = DbContext.GetInstance())
             {
-                string query = "UPDATE Responsable SET nom = ?";
+                string query = "UPDATE Responsable SET nom = ? WHERE id = ?";
                 using (var command = new SQLiteCommand(query, ctx))
                 {
                     command.Parameters.Add(new SQLiteParameter("nom", responsable.Nom));
+                    command.Parameters.Add(new SQLiteParameter("id", responsable.Id));
 
                     command.ExecuteNonQuery();
                 }

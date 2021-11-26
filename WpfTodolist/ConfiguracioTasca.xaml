@@ -33,12 +33,13 @@
         <Label Name="lbl_responsable" VerticalAlignment="Center" Content="Responsable:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <TextBox Name="nom_responsable" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
         <Button Name="ID_Binding" Visibility="Hidden" Content="{Binding ID}"></Button>
+        <Button Name="Responsable_Binding" Visibility="Hidden" Content="{Binding Responsable}"></Button>
 
         <Label Name="lbl_prioritat" VerticalAlignment="Center" Content="Prioritat:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5">
             <ComboBoxItem>Alta</ComboBoxItem>
             <ComboBoxItem>Mitja</ComboBoxItem>
-            <ComboBoxItem>Baixa</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">Baixa</ComboBoxItem>
         </ComboBox>
 
         <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5,5,5,5" Click="Button_Cancelar_Click" IsCancel="True"/>

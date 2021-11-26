@@ -39,6 +39,8 @@ namespace WpfTodolist.Persistance
                         }
                     }
 
+                    /** TEST DATA
+
                     for (var i = 1; i <= 10; i++)//Responsable
                     {
                         var query = "INSERT INTO Responsable (nom) VALUES (?)";
@@ -69,6 +71,7 @@ namespace WpfTodolist.Persistance
                             command.ExecuteNonQuery();
                         }
                     }
+                    **/
                 }
             }
         }

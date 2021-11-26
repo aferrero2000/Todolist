@@ -36,7 +36,7 @@ namespace WpfTodolist
             InitializeComponent();
 
             Tasca tasca = TascaService.GetOne(Convert.ToInt32(ID));
-            Responsable responsable = ResponsableService.GetOne(Convert.ToInt32(tasca.Id));
+            Responsable responsable = ResponsableService.GetOne(Convert.ToInt32(tasca.Responsable));
             nom_tasca.Text = tasca.Nom;
             descripcio.Text = tasca.Descripcio;
             data_de_creacio.SelectedDate = tasca.Data_creacio;
@@ -55,13 +55,14 @@ namespace WpfTodolist
                     break;
             }
             ID_Binding.Content = ID;
+            Responsable_Binding.Content = tasca.Responsable.ToString();
 
         }
         private void Button_Guardar_Click(object sender, RoutedEventArgs e)
         {
             Tasca tasca = new Tasca();
             Responsable responsable = new Responsable();
-
+            
             tasca.Nom = nom_tasca.Text;
             tasca.Descripcio = descripcio.Text;
             DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
@@ -69,6 +70,8 @@ namespace WpfTodolist
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
             responsable.Nom = nom_responsable.Text;
+            tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content.ToString());
+            responsable.Id = tasca.Responsable;
             switch (prioritata.SelectedIndex)
             {
                 case 0:
@@ -88,12 +91,12 @@ namespace WpfTodolist
                 ResponsableService.SetOne(responsable);
                 Responsable temp = ResponsableService.GetOne(responsable.Nom);
                 tasca.Responsable = temp.Id;
-                MessageBox.Show(temp.Id.ToString());
                 TascaService.SetOne(tasca);
             }
             else
             {
                 tasca.Id = Convert.ToInt32(ID_Binding.Content);
+                tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content);
                 ResponsableService.Update(responsable);
                 TascaService.UpdateNoEstat(tasca);
             }
