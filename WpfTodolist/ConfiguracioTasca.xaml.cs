@@ -70,8 +70,6 @@ namespace WpfTodolist
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
             responsable.Nom = nom_responsable.Text;
-            tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content.ToString());
-            responsable.Id = tasca.Responsable;
             switch (prioritata.SelectedIndex)
             {
                 case 0:
@@ -95,6 +93,8 @@ namespace WpfTodolist
             }
             else
             {
+                tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content.ToString());
+                responsable.Id = tasca.Responsable;
                 tasca.Id = Convert.ToInt32(ID_Binding.Content);
                 tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content);
                 ResponsableService.Update(responsable);
