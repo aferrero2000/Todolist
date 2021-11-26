@@ -31,7 +31,7 @@ namespace WpfTodolist.Service
                                 Data_creacio = Convert.ToDateTime(reader["data_creacio"]),
                                 Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]),
                                 Responsable = Convert.ToInt32(reader["responsable"].ToString()),
-                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString()),
+                                Prioritat = reader["prioritat"].ToString(),
                                 Estat = reader["estat"].ToString()
                             });
                         }
@@ -66,7 +66,7 @@ namespace WpfTodolist.Service
                                 Data_creacio = Convert.ToDateTime(reader["data_creacio"]),
                                 Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]),
                                 Responsable = Convert.ToInt32(reader["responsable"].ToString()),
-                                Prioritat = Convert.ToInt32(reader["prioritat"].ToString()),
+                                Prioritat = reader["prioritat"].ToString(),
                                 Estat = reader["estat"].ToString()
                             });
                         }
@@ -97,7 +97,7 @@ namespace WpfTodolist.Service
                             result.Data_creacio = Convert.ToDateTime(reader["data_creacio"]);
                             result.Data_finalitzacio = Convert.ToDateTime(reader["data_finalitzacio"]);
                             result.Responsable = Convert.ToInt32(reader["responsable"].ToString());
-                            result.Prioritat = Convert.ToInt32(reader["prioritat"].ToString());
+                            result.Prioritat = reader["prioritat"].ToString();
                             result.Estat = reader["estat"].ToString();
                         }
                     }

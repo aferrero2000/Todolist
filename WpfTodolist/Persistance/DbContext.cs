@@ -62,8 +62,8 @@ namespace WpfTodolist.Persistance
                             command.Parameters.Add(new SQLiteParameter("data_creacio", DateTime.Today));
                             var rand = new Random();
                             command.Parameters.Add(new SQLiteParameter("data_finalitzacio", DateTime.Today.AddDays(rand.Next(2,7))));
-                            command.Parameters.Add(new SQLiteParameter("responsable", "Responsable " + i));
-                            command.Parameters.Add(new SQLiteParameter("prioritat", "0"));
+                            command.Parameters.Add(new SQLiteParameter("responsable", i));
+                            command.Parameters.Add(new SQLiteParameter("prioritat", "Red"));
                             command.Parameters.Add(new SQLiteParameter("estat", "ToDo"));
 
                             command.ExecuteNonQuery();

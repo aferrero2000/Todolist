@@ -1,7 +1,6 @@
 ﻿CREATE TABLE IF NOT EXISTS Prioritat (
-	ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	Nom TEXT CHECK(Nom IN ('Alta','Mitja','Baixa')) NOT NULL,
-	Color TEXT NOT NULL
+	Color TEXT NOT NULL PRIMARY KEY,
+	Nom TEXT CHECK(Nom IN ('Alta','Mitja','Baixa')) NOT NULL
 );
 
 INSERT INTO Prioritat (nom, color) VALUES
@@ -21,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Tasca (
 	Data_creacio DATE NOT NULL,
 	Data_finalitzacio DATE NOT NULL,
 	Responsable INTEGER,
-	Prioritat INTEGER,
+	Prioritat TEXT,
 	Estat TEXT CHECK(Estat IN ('ToDo', 'Doing', 'Done')) NOT NULL,
 	FOREIGN KEY(Prioritat) REFERENCES Prioritat(ID),
 	FOREIGN KEY(Responsable) REFERENCES Responsable(ID)

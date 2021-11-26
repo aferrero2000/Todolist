@@ -42,7 +42,18 @@ namespace WpfTodolist
             data_de_creacio.SelectedDate = tasca.Data_creacio;
             data_prevista_de_finalitzacio.SelectedDate = tasca.Data_finalitzacio;
             nom_responsable.Text = responsable.Nom;
-            prioritata.SelectedIndex = tasca.Prioritat - 1;
+            switch (tasca.Prioritat)
+            {
+                case "Red":
+                    prioritata.SelectedIndex = 0;
+                    break;
+                case "Yellow":
+                    prioritata.SelectedIndex = 1;
+                    break;
+                case "Green":
+                    prioritata.SelectedIndex = 2;
+                    break;
+            }
             ID_Binding.Content = ID;
 
         }
@@ -53,30 +64,45 @@ namespace WpfTodolist
 
             tasca.Nom = nom_tasca.Text;
             tasca.Descripcio = descripcio.Text;
-            tasca.Prioritat = 1;
             DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_creacio = datacreacio;
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
             responsable.Nom = nom_responsable.Text;
+            switch (prioritata.SelectedIndex)
+            {
+                case 0:
+                    tasca.Prioritat = "Red";
+                    break;
+                case 1:
+                    tasca.Prioritat = "Yellow";
+                    break;
+                case 2:
+                    tasca.Prioritat = "Green";
+                    break;
+            }
 
             if (novatasca)
             {
                 tasca.Estat = "ToDo";
-                TascaService.SetOne(tasca);
                 ResponsableService.SetOne(responsable);
+                Responsable temp = ResponsableService.GetOne(responsable.Nom);
+                tasca.Responsable = temp.Id;
+                MessageBox.Show(temp.Id.ToString());
+                TascaService.SetOne(tasca);
             }
             else
             {
                 tasca.Id = Convert.ToInt32(ID_Binding.Content);
-                TascaService.UpdateNoEstat(tasca);
                 ResponsableService.Update(responsable);
+                TascaService.UpdateNoEstat(tasca);
             }
+            Close();
         }
 
         private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
         {
-            Close(); //NOSE
+            Close();
         }
 
         private void btn_eliminar_Click(object sender, RoutedEventArgs e)

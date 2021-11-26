@@ -25,9 +25,8 @@ namespace WpfTodolist.Service
                         {
                             result.Add(new Prioritat
                             {
-                                Id = Convert.ToInt32(reader["ID"].ToString()),
-                                Nom = reader["Nom"].ToString(),
-                                Color = reader["Color"].ToString()
+                                Color = reader["Color"].ToString(),
+                                Nom = reader["Nom"].ToString()
                             });
                         }
                     }
@@ -38,23 +37,23 @@ namespace WpfTodolist.Service
             return result;
         }
 
-        public static Prioritat GetOne(int identificador)
+        public static Prioritat GetOne(string color)
         {
             var result = new Prioritat();
 
             using (var ctx = DbContext.GetInstance())
             {
-                var query = "SELECT * FROM Prioritat WHERE id = " + identificador;
+                var query = "SELECT * FROM Prioritat WHERE color = ?";
 
                 using (var command = new SQLiteCommand(query, ctx))
                 {
+                    command.Parameters.Add(new SQLiteParameter("color", color));
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            result.Id = Convert.ToInt32(reader["id"].ToString());
-                            result.Nom = reader["nom"].ToString();
                             result.Color = reader["color"].ToString();
+                            result.Nom = reader["nom"].ToString();
                         }
                     }
                 }

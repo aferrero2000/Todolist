@@ -13,22 +13,22 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="0.11*"/>
+            <ColumnDefinition Width="0.05*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.05*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">To Do</Label>
-        <Button Name="afegir_tasca" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Margin="60,0,0,0" VerticalAlignment="Center" Padding="5,0,5,0" Click="Button_ex1_Click">+</Button>
+        <Button Name="afegir_tasca" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Margin="60,0,0,0" VerticalAlignment="Center" Padding="5,0,5,0" Click="afegir_tasca_Click">+</Button>
         <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Doing</Label>
         <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">Done</Label>
 
         <ListBox Name="ListToDo" Grid.Row="1" Grid.Column="0">
-            <ListBox.ItemTemplate>
+            <ListBox.ItemTemplate >
                 <DataTemplate>
                     <StackPanel Background="{Binding Prioritat}">
-                        <StackPanel Tag="{Binding Estat}" Orientation="Vertical" Margin="0,0,0,-18">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,-18">
                             <Button Tag="{Binding Id}"  Name="Modificarr" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click">⚙</Button>
                         </StackPanel>
                         <TextBlock Margin="0,0,100,0" Text="{Binding Nom}" ></TextBlock>
@@ -54,7 +54,10 @@
         <ListBox Name="ListDoing" Grid.Row="1" Grid.Column="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Background="{Binding Prioritat}">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,-18">
+                            <Button Tag="{Binding Id}"  Name="Modificarr" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click">⚙</Button>
+                        </StackPanel>
                         <TextBlock Text="{Binding Nom}"></TextBlock>
                         <TextBlock Text="{Binding Descripcio}"></TextBlock>
                         <DatePicker SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
@@ -79,7 +82,10 @@
         <ListBox Name="ListDone" Grid.Row="1" Grid.Column="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Background="{Binding Prioritat}">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,-18">
+                            <Button Tag="{Binding Id}"  Name="Modificarr" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click">⚙</Button>
+                        </StackPanel>
                         <TextBlock Text="{Binding Nom}"></TextBlock>
                         <TextBlock Text="{Binding Descripcio}"></TextBlock>
                         <DatePicker SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>

@@ -12,7 +12,7 @@ namespace WpfTodolist.Entity
         public DateTime Data_creacio { get; set; }
         public DateTime Data_finalitzacio { get; set; }
         public int Responsable { get; set; }
-        public int Prioritat { get; set; }
+        public string Prioritat { get; set; }
         public string Estat { get; set; }
     }
 }

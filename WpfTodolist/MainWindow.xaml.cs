@@ -30,7 +30,7 @@ namespace WpfTodolist
         public MainWindow()
         {
             InitializeComponent();
-            DbContext.Up(); //Si la base de dades no existeix, no executarà el codi posterior. (ara si funciona però no sé com ho he solucionat)
+            DbContext.Up();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -38,11 +38,7 @@ namespace WpfTodolist
             actualitzarLlistes();
         }
 
-
-
-
-
-        private void Button_ex1_Click(object sender, RoutedEventArgs e)
+        private void afegir_tasca_Click(object sender, RoutedEventArgs e)
         {
             Window1 form = new Window1();
             form.ShowDialog();
@@ -89,11 +85,6 @@ namespace WpfTodolist
         {
             IEnumerable<Prioritat> prioritats = PrioritatService.GetAll();
             ListToDo.ItemsSource = TascaService.GetAll("ToDo");
-            foreach (Tasca item in ListToDo.ItemsSource)
-            { 
-                item.
-                MessageBox.Show(item.Prioritat.ToString());
-            } 
             ListDoing.ItemsSource = TascaService.GetAll("Doing");
             ListDone.ItemsSource = TascaService.GetAll("Done");
         }

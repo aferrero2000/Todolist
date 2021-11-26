@@ -61,6 +61,31 @@ namespace WpfTodolist.Service
             return result;
         }
 
+        public static Responsable GetOne(String identificador)
+        {
+            var result = new Responsable();
+
+            using (var ctx = DbContext.GetInstance())
+            {
+                var query = "SELECT * FROM Responsable WHERE nom = ?";
+
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("nom", identificador));
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Id = Convert.ToInt32(reader["id"].ToString());
+                            result.Nom = reader["nom"].ToString();
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public static void SetOne(Responsable responsable)
         {
             using (var ctx = DbContext.GetInstance())
