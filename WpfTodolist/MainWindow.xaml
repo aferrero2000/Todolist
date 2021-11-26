@@ -21,15 +21,13 @@
 
         <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">To Do</Label>
         <Button Name="afegir_tasca" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Margin="60,0,0,0" VerticalAlignment="Center" Padding="5,0,5,0" Click="Button_ex1_Click">+</Button>
-        <Button Name="todo_doing" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,80,0,0" Padding="5,0,5,0" Click="todo_doing_Click" >⇄</Button>
         <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Doing</Label>
-        <Button Name="doing_done" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" Padding="5,0,5,0" >⇄</Button>
         <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">Done</Label>
 
         <ListBox Name="ListToDo" Grid.Row="1" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Background="{Binding Prioritat}">
                         <StackPanel Tag="{Binding Estat}" Orientation="Vertical" Margin="0,0,0,-18">
                             <Button Tag="{Binding Id}"  Name="Modificarr" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click">⚙</Button>
                         </StackPanel>
@@ -39,6 +37,15 @@
                         <DatePicker SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
                         <TextBlock Text="{Binding Responsable}"></TextBlock>
                         <TextBlock Text="{Binding Prioritat}"></TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Tag="{Binding Id}" Grid.Column="2" Name="todo_next" Click="todo_next_Click">→</Button>
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -54,6 +61,16 @@
                         <DatePicker SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
                         <TextBlock Text="{Binding Responsable}"></TextBlock>
                         <TextBlock Text="{Binding Prioritat}"></TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Tag="{Binding Id}" Grid.Column="1" Name="doing_previous" Click="doing_previous_Click">←</Button>
+                            <Button Tag="{Binding Id}" Grid.Column="2" Name="doing_next" Click="doing_next_Click">→</Button>
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -69,6 +86,15 @@
                         <DatePicker SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False"></DatePicker>
                         <TextBlock Text="{Binding Responsable}"></TextBlock>
                         <TextBlock Text="{Binding Prioritat}"></TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Tag="{Binding Id}" Grid.Column="1" Name="done_previous" Click="done_previous_Click">←</Button>
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

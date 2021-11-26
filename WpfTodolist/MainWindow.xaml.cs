@@ -35,9 +35,7 @@ namespace WpfTodolist
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ListToDo.ItemsSource = TascaService.GetAll("ToDo");
-            ListDoing.ItemsSource = TascaService.GetAll("Doing");
-            ListDone.ItemsSource = TascaService.GetAll("Done");
+            actualitzarLlistes();
         }
 
 
@@ -48,7 +46,7 @@ namespace WpfTodolist
         {
             Window1 form = new Window1();
             form.ShowDialog();
-            ListToDo.ItemsSource = TascaService.GetAll();
+            actualitzarLlistes();
         }
 
         private void Modificar_Click(object sender, RoutedEventArgs e)
@@ -56,12 +54,48 @@ namespace WpfTodolist
             Button boto = (Button)sender;
             Window1 form = new Window1(boto.Tag.ToString());
             form.ShowDialog();
-            ListToDo.ItemsSource = TascaService.GetAll();
+            actualitzarLlistes();
         }
 
-        private void todo_doing_Click(object sender, RoutedEventArgs e)
+        private void todo_next_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("");
+            Button boto = (Button)sender;
+            TascaService.UpdateEstat("Doing", Convert.ToInt32(boto.Tag.ToString()));
+            actualitzarLlistes();
+        }
+
+        private void doing_previous_Click(object sender, RoutedEventArgs e)
+        {
+            Button boto = (Button)sender;
+            TascaService.UpdateEstat("ToDo", Convert.ToInt32(boto.Tag.ToString()));
+            actualitzarLlistes();
+        }
+
+        private void doing_next_Click(object sender, RoutedEventArgs e)
+        {
+            Button boto = (Button)sender;
+            TascaService.UpdateEstat("Done", Convert.ToInt32(boto.Tag.ToString()));
+            actualitzarLlistes();
+        }
+
+        private void done_previous_Click(object sender, RoutedEventArgs e)
+        {
+            Button boto = (Button)sender;
+            TascaService.UpdateEstat("Doing", Convert.ToInt32(boto.Tag.ToString()));
+            actualitzarLlistes();
+        }
+
+        private void actualitzarLlistes()
+        {
+            IEnumerable<Prioritat> prioritats = PrioritatService.GetAll();
+            ListToDo.ItemsSource = TascaService.GetAll("ToDo");
+            foreach (Tasca item in ListToDo.ItemsSource)
+            { 
+                item.
+                MessageBox.Show(item.Prioritat.ToString());
+            } 
+            ListDoing.ItemsSource = TascaService.GetAll("Doing");
+            ListDone.ItemsSource = TascaService.GetAll("Done");
         }
     }
 }

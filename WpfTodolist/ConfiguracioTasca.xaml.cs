@@ -35,21 +35,19 @@ namespace WpfTodolist
             novatasca = false;
             InitializeComponent();
 
-            Tasca tasco = TascaService.GetOne(Convert.ToInt32(ID));
-            Responsable responsablo = ResponsableService.GetOne(Convert.ToInt32(tasco.Id));
-            nom_tasca.Text = tasco.Nom;
-            descripcio.Text = tasco.Descripcio;
-            data_de_creacio.SelectedDate = tasco.Data_creacio;
-            data_prevista_de_finalitzacío.SelectedDate = tasco.Data_finalitzacio;
-            responsablee.Text = responsablo.Nom;
-            prioritata.SelectedIndex = tasco.Prioritat - 1;
+            Tasca tasca = TascaService.GetOne(Convert.ToInt32(ID));
+            Responsable responsable = ResponsableService.GetOne(Convert.ToInt32(tasca.Id));
+            nom_tasca.Text = tasca.Nom;
+            descripcio.Text = tasca.Descripcio;
+            data_de_creacio.SelectedDate = tasca.Data_creacio;
+            data_prevista_de_finalitzacio.SelectedDate = tasca.Data_finalitzacio;
+            nom_responsable.Text = responsable.Nom;
+            prioritata.SelectedIndex = tasca.Prioritat - 1;
             ID_Binding.Content = ID;
 
         }
         private void Button_Guardar_Click(object sender, RoutedEventArgs e)
         {
-            string caption = "Informació";
-            MessageBox.Show(nom_tasca.Text + descripcio.Text, caption, MessageBoxButton.OK, MessageBoxImage.Information);
             Tasca tasca = new Tasca();
             Responsable responsable = new Responsable();
 
@@ -58,9 +56,9 @@ namespace WpfTodolist
             tasca.Prioritat = 1;
             DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_creacio = datacreacio;
-            DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacío.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
+            DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
-            responsable.Nom = responsablee.Text;
+            responsable.Nom = nom_responsable.Text;
 
             if (novatasca)
             {
@@ -74,9 +72,6 @@ namespace WpfTodolist
                 TascaService.UpdateNoEstat(tasca);
                 ResponsableService.Update(responsable);
             }
-            
-            responsable.Nom = responsablee.Text;
-
         }
 
         private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
@@ -84,6 +79,10 @@ namespace WpfTodolist
             Close(); //NOSE
         }
 
-
+        private void btn_eliminar_Click(object sender, RoutedEventArgs e)
+        {
+            TascaService.Delete(TascaService.GetOne(Convert.ToInt32(ID_Binding.Content)).Id);
+            Close();
+        }
     }
 }

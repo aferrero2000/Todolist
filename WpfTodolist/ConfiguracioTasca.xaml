@@ -5,45 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
-        Title="Window1" Height="300" Width="550">
+        Title="Window1" MinHeight="310" MinWidth="400" Height="340" Width="600">
     <Grid Margin="25">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32*"></ColumnDefinition>
-            <ColumnDefinition Width="134*"/>
-            <ColumnDefinition Width="167*"></ColumnDefinition>
-            <ColumnDefinition Width="167*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Name="lbl_nom_tasca" Content="Nom:" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <TextBox Name="nom_tasca" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
-        <Label Name="lbl_descripcio" Content="Descripció:" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <TextBox Name="descripcio" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
-        <Label Name="lbl_data_de_creacio" Content="Data de creació:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <DatePicker Name="data_de_creacio" SelectedDateFormat="Short" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
-        <Label Name="lbl_data_prevista_de_finalitzacio" Content="Data de finalització:" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <DatePicker Name="data_prevista_de_finalitzacío" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
-        <Label Name="lbl_responsable" Content="Responsable:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <TextBox Name="responsablee" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <Label Name="lbl_nom_tasca" VerticalAlignment="Center" Content="Nom:" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <TextBox Name="nom_tasca" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <Label Name="lbl_descripcio" VerticalAlignment="Center" Content="Descripció:" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <TextBox Name="descripcio" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <Label Name="lbl_data_de_creacio" VerticalAlignment="Center" Content="Data de creació:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <DatePicker Name="data_de_creacio" SelectedDateFormat="Short" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <Label Name="lbl_data_prevista_de_finalitzacio" VerticalAlignment="Center" Content="Data de finalització:" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <DatePicker Name="data_prevista_de_finalitzacio" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <Label Name="lbl_responsable" VerticalAlignment="Center" Content="Responsable:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <TextBox Name="nom_responsable" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
         <Button Name="ID_Binding" Visibility="Hidden" Content="{Binding ID}"></Button>
 
-        <Label Name="lbl_prioritat" Content="Prioritat:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="5,5,5,5">
+        <Label Name="lbl_prioritat" VerticalAlignment="Center" Content="Prioritat:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5">
             <ComboBoxItem>Alta</ComboBoxItem>
             <ComboBoxItem>Mitja</ComboBoxItem>
             <ComboBoxItem>Baixa</ComboBoxItem>
         </ComboBox>
 
-        <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5,5,5,5" Grid.ColumnSpan="2" Click="Button_Cancelar_Click" IsCancel="True"/>
-        <Button Name="btn_eliminar" Content="Eliminar" Grid.Row="6" Grid.Column="2" Margin="5,5,5,5"/>
-        <Button Name="btn_guardar" Content="Guardar" Grid.Row="6" Grid.Column="3" Margin="5,5,5,5" Click="Button_Guardar_Click"/>
+        <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5,5,5,5" Click="Button_Cancelar_Click" IsCancel="True"/>
+        <Button Name="btn_eliminar" Content="Eliminar" Grid.Row="6" Grid.Column="1" Margin="5,5,5,5" Click="btn_eliminar_Click"/>
+        <Button Name="btn_guardar" Content="Guardar" Grid.Row="6" Grid.Column="2" Margin="5,5,5,5" Click="Button_Guardar_Click"/>
     </Grid>
 </Window>

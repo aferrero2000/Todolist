@@ -128,17 +128,17 @@ namespace WpfTodolist.Service
             }
         }
 
-        public static void UpdateEstat(Tasca tasca)
+        public static void UpdateEstat(String estat, int id)
         {
             using (var ctx = DbContext.GetInstance())
             {
-                string query = "UPDATE Tasca (estat) SET VALUES (?) WHERE id = ?";
+                string query = "UPDATE Tasca SET estat = ? WHERE id = ?";
                 using (var command = new SQLiteCommand(query, ctx))
                 {
-                    command.Parameters.Add(new SQLiteParameter("estat", tasca.Estat));
-                    command.Parameters.Add(new SQLiteParameter("id", tasca.Id));
+                    command.Parameters.Add(new SQLiteParameter("estat", estat));
+                    command.Parameters.Add(new SQLiteParameter("id", id));
 
-                    int i=command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
             }
 
@@ -171,7 +171,7 @@ namespace WpfTodolist.Service
         {
             using (var ctx = DbContext.GetInstance())
             {
-                string query = "DELETE FROM Users WHERE Id = ?";
+                string query = "DELETE FROM Tasca WHERE Id = ?";
                 using (var command = new SQLiteCommand(query, ctx))
                 {
                     command.Parameters.Add(new SQLiteParameter("", Id));
