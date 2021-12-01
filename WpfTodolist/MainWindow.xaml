@@ -6,8 +6,11 @@
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    
+    
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition MinHeight="30" Height="30" MaxHeight="30"/>
             <RowDefinition MinHeight="100" Height="1*"/>
             <RowDefinition MinHeight="400" Height="4*"/>
         </Grid.RowDefinitions>
@@ -19,12 +22,32 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">To Do</Label>
-        <Button Name="afegir_tasca" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Margin="140,0,0,0" VerticalAlignment="Center" Padding="10,0,10,5" FontSize="24" Click="afegir_tasca_Click">+</Button>
-        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Doing</Label>
-        <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Done</Label>
+        <Grid Grid.Row="0" Grid.ColumnSpan="5">  
+            <Menu HorizontalAlignment="Stretch" Height="30"  VerticalAlignment="Top" Padding="5">  
+                <Menu.ItemsPanel>  
+                    <ItemsPanelTemplate>  
+                        <DockPanel HorizontalAlignment="Stretch"></DockPanel>  
+                    </ItemsPanelTemplate>  
+                </Menu.ItemsPanel>
+                <MenuItem Header="Afegir tasca" Click="afegir_tasca_Click"></MenuItem>
+                    <MenuItem Header="Responsable"></MenuItem>
+                    <MenuItem Header="About"></MenuItem>
+                    <MenuItem Header="Tancar sessió" HorizontalAlignment="Right"></MenuItem>
 
-        <ListBox Name="ListToDo" Grid.Row="1" Grid.Column="0">
+                    <!--<MenuItem Header="Afegir tasca" Click="afegir_click_hola"></MenuItem>
+                    <MenuItem Header="Responsable" Click="responsable_click_hola"></MenuItem>
+                    <MenuItem Header="About" Click="about_click_hola"></MenuItem>
+                    <MenuItem Header="Tancar sessió" HorizontalAlignment="Right" Click="tancarsessio_click_hola"></MenuItem>-->
+
+
+                </Menu>  
+        </Grid>
+
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">To Do</Label>
+        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Doing</Label>
+        <Label Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Done</Label>
+
+        <ListBox Name="ListToDo" Grid.Row="2" Grid.Column="0">
             <ListBox.ItemTemplate >
                 <DataTemplate>
                     <StackPanel Background="{Binding Prioritat}">
@@ -50,7 +73,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Name="ListDoing" Grid.Row="1" Grid.Column="2">
+        <ListBox Name="ListDoing" Grid.Row="2" Grid.Column="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Background="{Binding Prioritat}">
@@ -77,7 +100,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Name="ListDone" Grid.Row="1" Grid.Column="4">
+        <ListBox Name="ListDone" Grid.Row="2" Grid.Column="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Background="{Binding Prioritat}">
