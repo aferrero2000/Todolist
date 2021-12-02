@@ -27,9 +27,19 @@
         <Label Name="lbl_descripcio" VerticalAlignment="Center" Content="Descripció:" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <TextBox Name="descripcio" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
         <Label Name="lbl_data_de_creacio" VerticalAlignment="Center" Content="Data de creació:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <DatePicker Name="data_de_creacio" SelectedDateFormat="Short" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <DatePicker Name="data_de_creacio" SelectedDateFormat="Short" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5">
+            <DatePicker.BlackoutDates>
+                <CalendarDateRange Start="1/1/0001" End="12/31/1969"/>
+            </DatePicker.BlackoutDates>
+        </DatePicker>
+
         <Label Name="lbl_data_prevista_de_finalitzacio" VerticalAlignment="Center" Content="Data de finalització:" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <DatePicker Name="data_prevista_de_finalitzacio" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+        <DatePicker Name="data_prevista_de_finalitzacio" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5">
+        <DatePicker.BlackoutDates>
+            <CalendarDateRange Start="1/1/0001" End="12/31/1969"/>
+        </DatePicker.BlackoutDates>
+        </DatePicker>
+
         <Label Name="lbl_responsable" VerticalAlignment="Center" Content="Responsable:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <TextBox Name="nom_responsable" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
         <Button Name="ID_Binding" Visibility="Hidden" Content="{Binding ID}"></Button>

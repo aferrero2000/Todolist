@@ -27,6 +27,10 @@ namespace WpfTodolist
         {
             novatasca = true;
             InitializeComponent();
+
+            data_de_creacio.SelectedDate = DateTime.Today;
+            data_prevista_de_finalitzacio.SelectedDate = DateTime.Today.AddDays(+7);
+
             btn_eliminar.Visibility = System.Windows.Visibility.Hidden;
         }
 
@@ -62,7 +66,7 @@ namespace WpfTodolist
         {
             Tasca tasca = new Tasca();
             Responsable responsable = new Responsable();
-            
+
             tasca.Nom = nom_tasca.Text;
             tasca.Descripcio = descripcio.Text;
             DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
@@ -83,26 +87,49 @@ namespace WpfTodolist
                     break;
             }
 
-            if (novatasca)
-            {
-                tasca.Estat = "ToDo";
-                ResponsableService.SetOne(responsable);
-                Responsable temp = ResponsableService.GetOne(responsable.Nom);
-                tasca.Responsable = temp.Id;
-                TascaService.SetOne(tasca);
-            }
-            else
-            {
-                tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content.ToString());
-                responsable.Id = tasca.Responsable;
-                tasca.Id = Convert.ToInt32(ID_Binding.Content);
-                tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content);
-                ResponsableService.Update(responsable);
-                TascaService.UpdateNoEstat(tasca);
-            }
-            Close();
-        }
+            bool dadescompletades;
+            dadescompletades = true;
 
+            if (nom_tasca.Text.Length == 0)
+            {
+                MessageBox.Show("Has d'introduir un nom.");
+                dadescompletades = false;
+            }
+            else if (descripcio.Text.Length == 0)
+            {
+                MessageBox.Show("Has d'introduir la descripció.");
+                dadescompletades = false;
+            }
+            else if (nom_responsable.Text.Length == 0)
+            {
+                MessageBox.Show("Has d'introduir un responsable.");
+                dadescompletades = false;
+            }
+
+            if (dadescompletades)
+            {
+
+                if (novatasca)
+                {
+                    tasca.Estat = "ToDo";
+                    ResponsableService.SetOne(responsable);
+                    Responsable temp = ResponsableService.GetOne(responsable.Nom);
+                    tasca.Responsable = temp.Id;
+                    TascaService.SetOne(tasca);
+                }
+                else
+                {
+                    tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content.ToString());
+                    responsable.Id = tasca.Responsable;
+                    tasca.Id = Convert.ToInt32(ID_Binding.Content);
+                    tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content);
+                    ResponsableService.Update(responsable);
+                    TascaService.UpdateNoEstat(tasca);
+                }
+
+                Close();
+            }
+        }
         private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
         {
             Close();
