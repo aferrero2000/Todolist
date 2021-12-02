@@ -83,10 +83,29 @@ namespace WpfTodolist
 
         private void actualitzarLlistes()
         {
-            IEnumerable<Prioritat> prioritats = PrioritatService.GetAll();
-            ListToDo.ItemsSource = TascaService.GetAll("ToDo");
-            ListDoing.ItemsSource = TascaService.GetAll("Doing");
-            ListDone.ItemsSource = TascaService.GetAll("Done");
+            List<Tasca_Responsable> itemsToDo = new List<Tasca_Responsable>();
+            IEnumerable<Tasca> toDo = TascaService.GetAll("ToDo");
+            foreach (Tasca tasca in toDo)
+            {
+                itemsToDo.Add(Tasca_ResponsableService.GetNomResponsable(tasca));
+            }
+            ListToDo.ItemsSource = itemsToDo;
+
+            List<Tasca_Responsable> itemsDoing = new List<Tasca_Responsable>();
+            IEnumerable<Tasca> Doing = TascaService.GetAll("Doing");
+            foreach (Tasca tasca in Doing)
+            {
+                itemsDoing.Add(Tasca_ResponsableService.GetNomResponsable(tasca));
+            }
+            ListDoing.ItemsSource = itemsDoing;
+
+            List<Tasca_Responsable> itemsDone = new List<Tasca_Responsable>();
+            IEnumerable<Tasca> Done = TascaService.GetAll("Done");
+            foreach (Tasca tasca in Done)
+            {
+                itemsDone.Add(Tasca_ResponsableService.GetNomResponsable(tasca));
+            }
+            ListDone.ItemsSource = itemsDone;
         }
     }
 }
