@@ -104,13 +104,13 @@ namespace WpfTodolist
             {
                 MessageBox.Show("Has d'introduir un responsable.");
                 dadescompletades = false;
-            }  
-            else if (data_de_creacio.SelectedDate == null) //ESTO NO FUNCIONA AYUDAAAAAAAAA
+            }
+            /*else if (data_de_creacio.SelectedDate == null) //No funciona, una solució temporal és afegir l'atribut "Focusable" a "False" en l'etiqueta "DatePicker"
             {
                 data_de_creacio.SelectedDate = DateTime.Today;
                 MessageBox.Show("Has d'introduir data de creació.");
                 dadescompletades = false;
-            }
+            }*/
 
             if (dadescompletades)
             {

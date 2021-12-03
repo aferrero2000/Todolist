@@ -9,6 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfTodolist.Entity;
+using WpfTodolist.Persistance;
+using WpfTodolist.Service;
 
 namespace WpfTodolist
 {
@@ -20,6 +23,8 @@ namespace WpfTodolist
         public ViewResponsable()
         {
             InitializeComponent();
+            dgUsers.ItemsSource = ResponsableService.GetAll();
         }
+
     }
 }

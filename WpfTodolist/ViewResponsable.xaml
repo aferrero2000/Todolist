@@ -22,8 +22,7 @@
           AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" Width="30"/>
-                <DataGridTextColumn Header="Nom" IsReadOnly="True" Binding="{Binding Name}" Width="100"/>
-                <DataGridTextColumn Header="Cognom" IsReadOnly="True" Binding="{Binding LastName}" Width="Auto"/>
+                <DataGridTextColumn Header="Nom" IsReadOnly="True" Binding="{Binding Nom}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

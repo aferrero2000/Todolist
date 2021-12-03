@@ -18,6 +18,7 @@ namespace WpfTodolist
     /// </summary>
     public partial class ConfiguracioResponsable : Page
     {
+
         public ConfiguracioResponsable()
         {
             InitializeComponent();

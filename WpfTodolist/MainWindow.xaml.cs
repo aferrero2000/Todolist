@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WpfTodolist.Entity;
 using WpfTodolist.Persistance;
 using WpfTodolist.Service;
-using WpfTodolist.Entity;
-using System.Diagnostics;
 
 namespace WpfTodolist
 {
@@ -44,6 +33,15 @@ namespace WpfTodolist
             form.ShowDialog();
             actualitzarLlistes();
         }
+
+        private void llista_responsabe_Click(object sender, RoutedEventArgs e)
+        {
+            ViewResponsable form = new ViewResponsable();
+
+            form.ShowDialog();
+            actualitzarLlistes();
+        }
+
 
         private void Modificar_Click(object sender, RoutedEventArgs e)
         {

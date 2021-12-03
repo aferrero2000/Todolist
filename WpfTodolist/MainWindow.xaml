@@ -30,7 +30,7 @@
                     </ItemsPanelTemplate>  
                 </Menu.ItemsPanel>
                 <MenuItem Header="Afegir tasca" Click="afegir_tasca_Click"></MenuItem>
-                    <MenuItem Header="Responsable"></MenuItem>
+                    <MenuItem Header="Responsable" Click="llista_responsabe_Click"></MenuItem>
                     <MenuItem Header="About"></MenuItem>
                     <MenuItem Header="Tancar sessió" HorizontalAlignment="Right"></MenuItem>
 
