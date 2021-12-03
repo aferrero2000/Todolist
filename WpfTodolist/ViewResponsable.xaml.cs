@@ -26,5 +26,11 @@ namespace WpfTodolist
             dgUsers.ItemsSource = ResponsableService.GetAll();
         }
 
+        private void Crear_usuari_Click(object sender, RoutedEventArgs e)
+        {
+            ConfiguracioResponsable form = new ConfiguracioResponsable();
+            form.ShowDialog();
+        }
+
     }
 }
