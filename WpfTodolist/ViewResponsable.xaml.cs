@@ -30,6 +30,33 @@ namespace WpfTodolist
         {
             ConfiguracioResponsable form = new ConfiguracioResponsable();
             form.ShowDialog();
+            dgUsers.ItemsSource = ResponsableService.GetAll();
+        }
+
+        private void DeleteUser(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Segur que vols eliminar el responsable seleccionat (Aquesta acció no es pot desfer)?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Responsable oUser = (Responsable)dgUsers.SelectedItem;
+                    ResponsableService.Delete(oUser.Id);
+                    dgUsers.ItemsSource = ResponsableService.GetAll();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+        }
+
+        private void EditUser(object sender, RoutedEventArgs e)
+        {
+            Button boto = (Button)sender;
+            ConfiguracioResponsable form = new ConfiguracioResponsable(boto.Tag.ToString());
+            form.ShowDialog();
+            dgUsers.ItemsSource = ResponsableService.GetAll();
         }
 
     }

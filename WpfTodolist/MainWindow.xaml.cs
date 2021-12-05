@@ -31,7 +31,7 @@ namespace WpfTodolist
         {
             Window1 form = new Window1();
             form.ShowDialog();
-            actualitzarLlistes();
+            actualitzarLlistes(); 
         }
 
         private void llista_responsabe_Click(object sender, RoutedEventArgs e)

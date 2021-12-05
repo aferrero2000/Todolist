@@ -116,5 +116,18 @@ namespace WpfTodolist.Service
             }
 
         }
+
+        public static void Delete(int Id)
+        {
+            using (var ctx = DbContext.GetInstance())
+            {
+                string query = "DELETE FROM Responsable WHERE Id = ?";
+                using (var command = new SQLiteCommand(query, ctx))
+                {
+                    command.Parameters.Add(new SQLiteParameter("", Id));
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
