@@ -31,6 +31,15 @@ namespace WpfTodolist
             data_de_creacio.SelectedDate = DateTime.Today;
             data_prevista_de_finalitzacio.SelectedDate = DateTime.Today.AddDays(+7);
 
+            IEnumerable<Responsable> hola = ResponsableService.GetAll();
+            foreach (Responsable person in hola)
+            {
+                if (!Responsable_Bindingg.Items.Contains(person.Id))
+                {
+                    Responsable_Bindingg.Items.Add(person.Nom);
+                }
+            }
+
             btn_eliminar.Visibility = System.Windows.Visibility.Hidden;
         }
 
@@ -45,7 +54,18 @@ namespace WpfTodolist
             descripcio.Text = tasca.Descripcio;
             data_de_creacio.SelectedDate = tasca.Data_creacio;
             data_prevista_de_finalitzacio.SelectedDate = tasca.Data_finalitzacio;
-            nom_responsable.Text = responsable.Nom;
+
+            IEnumerable<Responsable> hola = ResponsableService.GetAll();
+            foreach (Responsable person in hola)
+            {
+                if (!Responsable_Bindingg.Items.Contains(person.Id))
+                {
+                    Responsable_Bindingg.Items.Add(person.Nom);
+                }
+            }
+            
+
+            Responsable_Bindingg.SelectedItem = responsable.Nom;
             switch (tasca.Prioritat)
             {
                 case "Red":
@@ -73,7 +93,7 @@ namespace WpfTodolist
             tasca.Data_creacio = datacreacio;
             DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
             tasca.Data_finalitzacio = datafinal;
-            responsable.Nom = nom_responsable.Text;
+            responsable.Nom = Responsable_Bindingg.SelectedItem.ToString();
             switch (prioritata.SelectedIndex)
             {
                 case 0:
@@ -87,6 +107,8 @@ namespace WpfTodolist
                     break;
             }
 
+
+
             bool dadescompletades;
             dadescompletades = true;
 
@@ -98,11 +120,6 @@ namespace WpfTodolist
             else if (descripcio.Text.Length == 0)
             {
                 MessageBox.Show("Has d'introduir la descripció.");
-                dadescompletades = false;
-            }
-            else if (nom_responsable.Text.Length == 0)
-            {
-                MessageBox.Show("Has d'introduir un responsable.");
                 dadescompletades = false;
             }
             /*else if (data_de_creacio.SelectedDate == null) //No funciona, una solució temporal és afegir l'atribut "Focusable" a "False" en l'etiqueta "DatePicker"
@@ -118,18 +135,15 @@ namespace WpfTodolist
                 if (novatasca)
                 {
                     tasca.Estat = "ToDo";
-                    ResponsableService.SetOne(responsable);
                     Responsable temp = ResponsableService.GetOne(responsable.Nom);
                     tasca.Responsable = temp.Id;
                     TascaService.SetOne(tasca);
                 }
                 else
                 {
-                    tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content.ToString());
-                    responsable.Id = tasca.Responsable;
+                    Responsable temp = ResponsableService.GetOne(responsable.Nom);
+                    tasca.Responsable = temp.Id;
                     tasca.Id = Convert.ToInt32(ID_Binding.Content);
-                    tasca.Responsable = Convert.ToInt32(Responsable_Binding.Content);
-                    ResponsableService.Update(responsable);
                     TascaService.UpdateNoEstat(tasca);
                 }
 
