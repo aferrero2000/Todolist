@@ -87,24 +87,27 @@ namespace WpfTodolist
             bool dadescompletades;
             dadescompletades = true;
 
+            string dadesperdeterminar;
+            dadesperdeterminar = "Has de determinar:";
+            
             if (nom_tasca.Text.Length == 0)
             {
-                MessageBox.Show("Has d'introduir un nom.");
+                dadesperdeterminar = dadesperdeterminar + " Nom -";
                 dadescompletades = false;
             }
-            else if (descripcio.Text.Length == 0)
+            if (descripcio.Text.Length == 0)
             {
-                MessageBox.Show("Has d'introduir la descripció.");
+                dadesperdeterminar = dadesperdeterminar + " Descripció -";
                 dadescompletades = false;
             }
-            else if (Responsable_Bindingg.Text.Length == 0)
+            if (Responsable_Bindingg.Text.Length == 0)
             {
-                MessageBox.Show("Has d'establir el responsable.");
+                dadesperdeterminar = dadesperdeterminar + " Responsable -";
                 dadescompletades = false;
             }
-            else if (prioritata.Text.Length == 0)
+            if (prioritata.Text.Length == 0)
             {
-                MessageBox.Show("Has d'establir la prioritat.");
+                dadesperdeterminar = dadesperdeterminar + " Prioritat -";
                 dadescompletades = false;
             }
 
@@ -150,6 +153,11 @@ namespace WpfTodolist
                 }
 
                 Close();
+            }
+            else
+            {
+                dadesperdeterminar = dadesperdeterminar.Remove(dadesperdeterminar.Length - 2);
+                MessageBox.Show(dadesperdeterminar);
             }
         }
         private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
