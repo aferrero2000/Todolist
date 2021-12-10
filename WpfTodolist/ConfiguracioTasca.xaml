@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
         Title="Window1" MinHeight="310" MinWidth="400" Height="340" Width="600">
+
     <Grid Margin="25">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -39,10 +40,14 @@
         <ComboBox Name="Responsable_Bindingg" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" ItemsSource="{Binding Responsable}" SelectedValuePath="Id"/>
 
         <Label Name="lbl_prioritat" VerticalAlignment="Center" Content="Prioritat:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5">
-            <ComboBoxItem>Alta</ComboBoxItem>
-            <ComboBoxItem>Mitja</ComboBoxItem>
-            <ComboBoxItem IsSelected="True">Baixa</ComboBoxItem>
+
+
+
+        <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" SelectionChanged="prioritata_SelectionChanged">
+            <ComboBoxItem Name="Red" Background="#ffc4c4" BorderBrush="Red" BorderThickness="5,0,0,0" Foreground="Black">Alta</ComboBoxItem>
+            <ComboBoxItem Name="Yellow" Background="#fdffc4" BorderBrush="Yellow" BorderThickness="5,0,0,0" Foreground="Black">Mitja</ComboBoxItem>
+            <ComboBoxItem Name="Green" Background="#6eff70" BorderBrush="Green" BorderThickness="5,0,0,0" Foreground="Black">Baix</ComboBoxItem>
+
         </ComboBox>
 
         <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5,5,5,5" Click="Button_Cancelar_Click" IsCancel="True"/>

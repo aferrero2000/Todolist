@@ -69,12 +69,15 @@ namespace WpfTodolist
             switch (tasca.Prioritat)
             {
                 case "Red":
+                    prioritata.Foreground = Brushes.Red;
                     prioritata.SelectedIndex = 0;
                     break;
                 case "Yellow":
+                    prioritata.Foreground = Brushes.Yellow;
                     prioritata.SelectedIndex = 1;
                     break;
                 case "Green":
+                    prioritata.Foreground = Brushes.Green;
                     prioritata.SelectedIndex = 2;
                     break;
             }
@@ -159,6 +162,26 @@ namespace WpfTodolist
         {
             TascaService.Delete(TascaService.GetOne(Convert.ToInt32(ID_Binding.Content)).Id);
             Close();
+        }
+
+        private void prioritata_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            ComboBoxItem comboBoxItem = (ComboBoxItem)comboBox.SelectedItem;
+
+            switch (comboBoxItem.Content)
+            { 
+                case "Alta":
+                    prioritata.Foreground = Brushes.Red;
+                    break;
+                case "Mitja":
+                    prioritata.Foreground = Brushes.DarkGoldenrod;
+                    break;
+                case "Baix":
+                    prioritata.Foreground = Brushes.Green;
+                    break;
+            }
+
         }
     }
 }
