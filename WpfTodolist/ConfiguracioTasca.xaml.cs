@@ -84,10 +84,6 @@ namespace WpfTodolist
         }
         private void Button_Guardar_Click(object sender, RoutedEventArgs e)
         {
-            Tasca tasca = new Tasca();
-            Responsable responsable = new Responsable();
-
-
             bool dadescompletades;
             dadescompletades = true;
 
@@ -115,6 +111,9 @@ namespace WpfTodolist
 
             if (dadescompletades)
             {
+                Tasca tasca = new Tasca();
+                Responsable responsable = new Responsable();
+
                 tasca.Nom = nom_tasca.Text;
                 tasca.Descripcio = descripcio.Text;
                 DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
