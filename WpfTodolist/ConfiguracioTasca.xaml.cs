@@ -31,8 +31,8 @@ namespace WpfTodolist
             data_de_creacio.SelectedDate = DateTime.Today;
             data_prevista_de_finalitzacio.SelectedDate = DateTime.Today.AddDays(+7);
 
-            IEnumerable<Responsable> hola = ResponsableService.GetAll();
-            foreach (Responsable person in hola)
+            IEnumerable<Responsable> ResponsableList = ResponsableService.GetAll();
+            foreach (Responsable person in ResponsableList)
             {
                 if (!Responsable_Bindingg.Items.Contains(person.Id))
                 {
@@ -55,17 +55,33 @@ namespace WpfTodolist
             data_de_creacio.SelectedDate = tasca.Data_creacio;
             data_prevista_de_finalitzacio.SelectedDate = tasca.Data_finalitzacio;
 
-            IEnumerable<Responsable> hola = ResponsableService.GetAll();
-            foreach (Responsable person in hola)
+            IEnumerable<Responsable> ResponsableList = ResponsableService.GetAll();
+            List<int> ResponsableListId = new List<int>();
+            foreach (Responsable person in ResponsableList)
             {
                 if (!Responsable_Bindingg.Items.Contains(person.Id))
                 {
                     Responsable_Bindingg.Items.Add(person.Nom);
+                    ResponsableListId.Add(person.Id);
                 }
             }
-            
 
-            Responsable_Bindingg.SelectedItem = responsable.Nom;
+            int i = 0;
+            while (Responsable_Bindingg.SelectedIndex != i)
+            {
+                if (ResponsableListId[i] == tasca.Responsable)
+                {
+                    Responsable_Bindingg.SelectedIndex = i;
+                }
+                else 
+                {
+                    i++;
+                }
+                
+            }
+
+
+
             switch (tasca.Prioritat)
             {
                 case "Red":
@@ -84,8 +100,6 @@ namespace WpfTodolist
         }
         private void Button_Guardar_Click(object sender, RoutedEventArgs e)
         {
-            bool dadescompletades;
-            dadescompletades = true;
 
             string dadesperdeterminar;
             dadesperdeterminar = "Has de determinar:";
@@ -93,29 +107,31 @@ namespace WpfTodolist
             if (nom_tasca.Text.Length == 0)
             {
                 dadesperdeterminar = dadesperdeterminar + " Nom -";
-                dadescompletades = false;
             }
             if (descripcio.Text.Length == 0)
             {
                 dadesperdeterminar = dadesperdeterminar + " Descripció -";
-                dadescompletades = false;
             }
             if (Responsable_Bindingg.Text.Length == 0)
             {
                 dadesperdeterminar = dadesperdeterminar + " Responsable -";
-                dadescompletades = false;
             }
             if (prioritata.Text.Length == 0)
             {
                 dadesperdeterminar = dadesperdeterminar + " Prioritat -";
-                dadescompletades = false;
             }
 
 
-            if (dadescompletades)
+            if (dadesperdeterminar == "Has de determinar:")
             {
                 Tasca tasca = new Tasca();
-                Responsable responsable = new Responsable();
+
+                IEnumerable<Responsable> ResponsableList = ResponsableService.GetAll();
+                List<int> ResponsableListId = new List<int>();
+                foreach (Responsable person in ResponsableList)
+                {
+                    ResponsableListId.Add(person.Id);
+                }
 
                 tasca.Nom = nom_tasca.Text;
                 tasca.Descripcio = descripcio.Text;
@@ -123,7 +139,7 @@ namespace WpfTodolist
                 tasca.Data_creacio = datacreacio;
                 DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
                 tasca.Data_finalitzacio = datafinal;
-                responsable.Nom = Responsable_Bindingg.SelectedItem.ToString();
+
                 switch (prioritata.SelectedIndex)
                 {
                     case 0:
@@ -140,14 +156,12 @@ namespace WpfTodolist
                 if (novatasca)
                 {
                     tasca.Estat = "ToDo";
-                    Responsable temp = ResponsableService.GetOne(responsable.Nom);
-                    tasca.Responsable = temp.Id;
+                    tasca.Responsable = ResponsableListId[Responsable_Bindingg.SelectedIndex];
                     TascaService.SetOne(tasca);
                 }
                 else
                 {
-                    Responsable temp = ResponsableService.GetOne(responsable.Nom);
-                    tasca.Responsable = temp.Id;
+                    tasca.Responsable = ResponsableListId[Responsable_Bindingg.SelectedIndex];
                     tasca.Id = Convert.ToInt32(ID_Binding.Content);
                     TascaService.UpdateNoEstat(tasca);
                 }
