@@ -87,27 +87,6 @@ namespace WpfTodolist
             Tasca tasca = new Tasca();
             Responsable responsable = new Responsable();
 
-            tasca.Nom = nom_tasca.Text;
-            tasca.Descripcio = descripcio.Text;
-            DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
-            tasca.Data_creacio = datacreacio;
-            DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
-            tasca.Data_finalitzacio = datafinal;
-            responsable.Nom = Responsable_Bindingg.SelectedItem.ToString();
-            switch (prioritata.SelectedIndex)
-            {
-                case 0:
-                    tasca.Prioritat = "Red";
-                    break;
-                case 1:
-                    tasca.Prioritat = "Yellow";
-                    break;
-                case 2:
-                    tasca.Prioritat = "Green";
-                    break;
-            }
-
-
 
             bool dadescompletades;
             dadescompletades = true;
@@ -122,15 +101,39 @@ namespace WpfTodolist
                 MessageBox.Show("Has d'introduir la descripció.");
                 dadescompletades = false;
             }
-            /*else if (data_de_creacio.SelectedDate == null) //No funciona, una solució temporal és afegir l'atribut "Focusable" a "False" en l'etiqueta "DatePicker"
+            else if (Responsable_Bindingg.Text.Length == 0)
             {
-                data_de_creacio.SelectedDate = DateTime.Today;
-                MessageBox.Show("Has d'introduir data de creació.");
+                MessageBox.Show("Has d'establir el responsable.");
                 dadescompletades = false;
-            }*/
+            }
+            else if (prioritata.Text.Length == 0)
+            {
+                MessageBox.Show("Has d'establir la prioritat.");
+                dadescompletades = false;
+            }
+
 
             if (dadescompletades)
             {
+                tasca.Nom = nom_tasca.Text;
+                tasca.Descripcio = descripcio.Text;
+                DateTime datacreacio = DateTime.ParseExact(data_de_creacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
+                tasca.Data_creacio = datacreacio;
+                DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
+                tasca.Data_finalitzacio = datafinal;
+                responsable.Nom = Responsable_Bindingg.SelectedItem.ToString();
+                switch (prioritata.SelectedIndex)
+                {
+                    case 0:
+                        tasca.Prioritat = "Red";
+                        break;
+                    case 1:
+                        tasca.Prioritat = "Yellow";
+                        break;
+                    case 2:
+                        tasca.Prioritat = "Green";
+                        break;
+                }
 
                 if (novatasca)
                 {
