@@ -69,15 +69,12 @@ namespace WpfTodolist
             switch (tasca.Prioritat)
             {
                 case "Red":
-                    prioritata.Foreground = Brushes.Red;
                     prioritata.SelectedIndex = 0;
                     break;
                 case "Yellow":
-                    prioritata.Foreground = Brushes.Yellow;
                     prioritata.SelectedIndex = 1;
                     break;
                 case "Green":
-                    prioritata.Foreground = Brushes.Green;
                     prioritata.SelectedIndex = 2;
                     break;
             }
