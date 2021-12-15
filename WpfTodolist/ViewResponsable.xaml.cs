@@ -58,6 +58,9 @@ namespace WpfTodolist
             form.ShowDialog();
             dgUsers.ItemsSource = ResponsableService.GetAll();
         }
-
+        private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

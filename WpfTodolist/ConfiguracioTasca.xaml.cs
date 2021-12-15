@@ -67,17 +67,16 @@ namespace WpfTodolist
             }
 
             int i = 0;
-            while (Responsable_Bindingg.SelectedIndex != i)
+            while (Responsable_Bindingg.SelectedIndex != i && i != ResponsableListId.Count)
             {
                 if (ResponsableListId[i] == tasca.Responsable)
                 {
                     Responsable_Bindingg.SelectedIndex = i;
                 }
-                else 
+                else
                 {
                     i++;
                 }
-                
             }
 
 
