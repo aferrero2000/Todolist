@@ -25,8 +25,6 @@ namespace WpfTodolist
         {
             novatasca = true;
             InitializeComponent();
-
-            btn_eliminar.Visibility = System.Windows.Visibility.Hidden;
         }
 
         public ConfiguracioResponsable(String ID)
