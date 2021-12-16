@@ -31,7 +31,7 @@
                 </Menu.ItemsPanel>
                 <MenuItem Header="Afegir tasca" Click="afegir_tasca_Click"></MenuItem>
                     <MenuItem Header="Responsable" Click="llista_responsabe_Click"></MenuItem>
-                    <MenuItem Header="About"></MenuItem>
+                    <!--MenuItem Header="About"></MenuItem>-->
                 <MenuItem Header="Tancar sessió" HorizontalAlignment="Right" Click="CloseButton_Click"></MenuItem>
 
                     <!--<MenuItem Header="Afegir tasca" Click="afegir_click_hola"></MenuItem>
