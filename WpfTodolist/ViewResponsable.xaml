@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfTodolist.ViewResponsable"
+﻿<Window x:Class="WpfTodolist.ViewResponsable" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
-        Title="ViewResponsable" Height="450" Width="800">
+        Title="ViewResponsable" Height="450" MinWidth="275" >
     <Grid Margin="25" Background="White" RenderTransformOrigin="0.559,0.504">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -13,28 +13,25 @@
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Name="ola" Width="*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btn_crear2" Content="Crear" Grid.Column="2" Margin="64,6,64,15" Grid.Row="1" Click="Crear_usuari_Click"/>
 
-        <DataGrid x:Name="dgUsers" VerticalAlignment="Top" HorizontalAlignment="Left" Width="Auto" 
-          AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False">
+        <DataGrid x:Name="dgUsers" VerticalAlignment="Top" HorizontalAlignment="Left" Width="Auto" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"
+          AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" Width="30"/>
-                <DataGridTextColumn Header="Nom" IsReadOnly="True" Binding="{Binding Nom}" Width="100"/>
-                <!--Añadimos botones editar y eliminar-->
-                <!--Boton Editar -->
-                <DataGridTemplateColumn Header="Editar">
+                <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" MinWidth="30" MaxWidth="30"/>
+                <DataGridTextColumn Header="Nom" IsReadOnly="True" Binding="{Binding Nom}" MinWidth="50" Width="1*"/>
+
+                <DataGridTemplateColumn Header="Editar" MinWidth="50" MaxWidth="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Tag="{Binding Id}" Content="Editar" Click="EditUser"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <!--Boton Eliminar -->
-                <DataGridTemplateColumn Header="Eliminar">
+
+                <DataGridTemplateColumn Header="Eliminar" MinWidth="50" MaxWidth="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Eliminar" Click="DeleteUser"/>
@@ -45,6 +42,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btn_cancelar" Content="Cancelar" Grid.Column="0" Margin="64,11,64,10" Click="Button_Cancelar_Click" IsCancel="True" Grid.Row="1"/>
+        <Button x:Name="btn_crear2" Content="Crear" Grid.Column="2" Height="30" Width="100" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Click="Crear_usuari_Click" />
+        <Button x:Name="btn_cancelar" Content="Cancelar" Grid.Column="0" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" Click="Button_Cancelar_Click" IsCancel="True" Grid.Row="1"/>
     </Grid>
 </Window>
