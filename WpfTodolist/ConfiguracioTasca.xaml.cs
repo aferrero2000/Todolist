@@ -36,7 +36,7 @@ namespace WpfTodolist
             {
                 if (!Responsable_Bindingg.Items.Contains(person.Id))
                 {
-                    Responsable_Bindingg.Items.Add(person.Nom);
+                    Responsable_Bindingg.Items.Add(person.Id.ToString() + ". " + person.Nom);
                 }
             }
 
@@ -61,7 +61,7 @@ namespace WpfTodolist
             {
                 if (!Responsable_Bindingg.Items.Contains(person.Id))
                 {
-                    Responsable_Bindingg.Items.Add(person.Nom);
+                    Responsable_Bindingg.Items.Add(person.Id.ToString() + ". " + person.Nom);
                     ResponsableListId.Add(person.Id);
                 }
             }
@@ -180,8 +180,11 @@ namespace WpfTodolist
 
         private void btn_eliminar_Click(object sender, RoutedEventArgs e)
         {
-            TascaService.Delete(TascaService.GetOne(Convert.ToInt32(ID_Binding.Content)).Id);
-            Close();
+            if (MessageBox.Show("Segur que vols eliminar aquesta tasca seleccionada (Aquesta acció no es pot desfer)?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                TascaService.Delete(TascaService.GetOne(Convert.ToInt32(ID_Binding.Content)).Id);
+                Close();
+            }
         }
 
         private void prioritata_SelectionChanged(object sender, SelectionChangedEventArgs e)
