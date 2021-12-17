@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
-        Title="ViewResponsable" Height="450" MinWidth="275" >
+        Title="ViewResponsable" Height="450" MinWidth="275" Width="500">
     <Grid Margin="25" Background="White" RenderTransformOrigin="0.559,0.504">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
