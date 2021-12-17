@@ -10,19 +10,22 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="30" Height="30" MaxHeight="30"/>
-            <RowDefinition MinHeight="100" Height="1*"/>
-            <RowDefinition MinHeight="400" Height="4*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.01*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="0.05*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="0.05*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.01*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="5">  
+        <Grid Grid.Row="0" Grid.ColumnSpan="6">  
             <Menu HorizontalAlignment="Stretch" Height="30"  VerticalAlignment="Top" Padding="5">  
                 <Menu.ItemsPanel>  
                     <ItemsPanelTemplate>  
@@ -43,69 +46,70 @@
                 </Menu>  
         </Grid>
 
-        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">To Do</Label>
-        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Doing</Label>
-        <Label Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Done</Label>
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">To Do</Label>
+        <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Doing</Label>
+        <Label Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Done</Label>
 
-        <ListBox Name="ListToDo" Grid.Row="2" Grid.Column="0">
+        <ListBox Name="ListToDo" Grid.Row="2" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate >
                 <DataTemplate>
-                    <StackPanel  Margin="-30,0,0,0" MaxWidth="{Binding ActualWidth,ElementName=ListToDo}">
-
-                        <Line HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,-115"
-                        X1="0" Y1="0"
-                        X2="0" Y2="110"
-                        Stroke="{Binding Prioritat}"
-                        StrokeThickness="3"/>
-
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="35"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="1" Tag="{Binding Id}" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click" Margin="0,0,0,-18">⚙</Button>
-                            <TextBlock Grid.Column="0" Margin="35,0,0,0" Text="{Binding Nom,StringFormat='Nom: {0}'}" ></TextBlock>
-                        </Grid>
-                        <TextBlock Margin="0,-20,9999,0" Visibility="Hidden"></TextBlock>
-                        <TextBlock TextWrapping="Wrap" Margin="35,0,0,0" Text="{Binding Descripcio,StringFormat='Desc: {0}'}"></TextBlock>
-                        <DatePicker Margin="35,0,0,0" SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
-                        <DatePicker Margin="35,0,0,0" SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
-                        <TextBlock Margin="35,0,0,0" Text="{Binding Responsable,StringFormat='Resp: {0}'}"></TextBlock>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Width="50" HorizontalAlignment="Center" Margin="30,0,0,0" Tag="{Binding Id}" Name="todo_next" Click="todo_next_Click">→</Button>
-                        </Grid>
-                    </StackPanel>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Name="StckPnlToDo" Grid.Column="1"  Margin="-30,0,0,0" MaxWidth="{Binding ActualWidth,ElementName=ListToDo}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="35"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Tag="{Binding Id}" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click" Margin="0,0,0,-18">⚙</Button>
+                                <TextBlock TextWrapping="Wrap" Grid.Column="0" Margin="30,0,0,0" Text="{Binding Nom,StringFormat='Nom: {0}'}" ></TextBlock>
+                            </Grid>
+                            <TextBlock Margin="0,-20,9999,0" Visibility="Hidden"></TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="30,0,0,0" Text="{Binding Descripcio,StringFormat='Desc: {0}'}"></TextBlock>
+                            <DatePicker Margin="30,0,0,0" SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
+                            <DatePicker Margin="30,0,0,0" SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
+                            <TextBlock TextWrapping="Wrap" Margin="30,0,0,0" Text="{Binding Responsable,StringFormat='Resp: {0}'}"></TextBlock>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Width="50" HorizontalAlignment="Center" Margin="30,0,0,0" Tag="{Binding Id}" Name="todo_next" Click="todo_next_Click">→</Button>
+                            </Grid>
+                        </StackPanel>
+                        <Border Height="{Binding ActualHeight,ElementName=StckPnlToDo}" Grid.Column="0" CornerRadius="10"  Background="{Binding Prioritat}" BorderThickness="3"></Border>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Name="ListDoing" Grid.Row="2" Grid.Column="2">
+        <ListBox Name="ListDoing" Grid.Row="2" Grid.Column="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="-30,0,0,0" MaxWidth="{Binding ActualWidth,ElementName=ListDoing}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
 
-                        <Line HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,-115"
-                        X1="0" Y1="0"
-                        X2="0" Y2="110"
-                        Stroke="{Binding Prioritat}"
-                        StrokeThickness="3"/>
-
+                        <StackPanel Name="StckPnlDoing" Margin="-30,0,0,0" Grid.Column="1" MaxWidth="{Binding ActualWidth,ElementName=ListDoing}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="35"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="1" Tag="{Binding Id}" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click" Margin="0,0,0,-18">⚙</Button>
-                            <TextBlock Grid.Column="0" Margin="35,0,0,0" Text="{Binding Nom,StringFormat='Nom: {0}'}" ></TextBlock>
+                            <TextBlock TextWrapping="Wrap" Grid.Column="0" Margin="30,0,0,0" Text="{Binding Nom,StringFormat='Nom: {0}'}" ></TextBlock>
                         </Grid>
                         <TextBlock Margin="0,-20,9999,0" Visibility="Hidden"></TextBlock>
-                        <TextBlock TextWrapping="Wrap" Margin="35,0,0,0" Text="{Binding Descripcio,StringFormat='Desc: {0}'}"></TextBlock>
-                        <DatePicker Margin="35,0,0,0" SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
-                        <DatePicker Margin="35,0,0,0" SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
-                        <TextBlock Margin="35,0,0,0" Text="{Binding Responsable,StringFormat='Resp: {0}'}"></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Margin="30,0,0,0" Text="{Binding Descripcio,StringFormat='Desc: {0}'}"></TextBlock>
+                        <DatePicker Margin="30,0,0,0" SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
+                        <DatePicker Margin="30,0,0,0" SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
+                        <TextBlock TextWrapping="Wrap" Margin="30,0,0,0" Text="{Binding Responsable,StringFormat='Resp: {0}'}"></TextBlock>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -115,34 +119,35 @@
                             <Button Width="50" HorizontalAlignment="Center" Margin="95,0,0,0" Tag="{Binding Id}" Grid.Column="0" Name="doing_next" Click="doing_next_Click">→</Button>
                         </Grid>
                     </StackPanel>
+                        <Border Height="{Binding ActualHeight,ElementName=StckPnlDoing}" Grid.Column="0" Margin="0,0,0,0"  CornerRadius="10"  Background="{Binding Prioritat}" BorderThickness="3"></Border>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Name="ListDone" Grid.Row="2" Grid.Column="4">
+        <ListBox Name="ListDone" Grid.Row="2" Grid.Column="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="-30,0,0,0" MaxWidth="{Binding ActualWidth,ElementName=ListDone}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
 
-                        <Line HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,-115"
-                        X1="0" Y1="0"
-                        X2="0" Y2="110"
-                        Stroke="{Binding Prioritat}"
-                        StrokeThickness="3"/>
-
-                        <Grid>
+                        <StackPanel Grid.Column="1" Name="StckPnlDone" Margin="-30,0,0,0" MaxWidth="{Binding ActualWidth,ElementName=ListDone}">
+                            <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="35"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="1" Tag="{Binding Id}" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,0,5,0" Click="Modificar_Click" Margin="0,0,0,-18">⚙</Button>
-                            <TextBlock Grid.Column="0" Margin="35,0,0,0" Text="{Binding Nom,StringFormat='Nom: {0}'}" ></TextBlock>
+                            <TextBlock TextWrapping="Wrap" Grid.Column="0" Margin="30,0,0,0" Text="{Binding Nom,StringFormat='Nom: {0}'}" ></TextBlock>
                         </Grid>
                         <TextBlock Margin="0,-20,9999,0" Visibility="Hidden"></TextBlock>
-                        <TextBlock TextWrapping="Wrap" Margin="35,0,0,0" Text="{Binding Descripcio,StringFormat='Desc: {0}'}"></TextBlock>
-                        <DatePicker Margin="35,0,0,0" SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
-                        <DatePicker Margin="35,0,0,0" SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
-                        <TextBlock Margin="35,0,0,0" Text="{Binding Responsable,StringFormat='Resp: {0}'}"></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Margin="30,0,0,0" Text="{Binding Descripcio,StringFormat='Desc: {0}'}"></TextBlock>
+                        <DatePicker Margin="30,0,0,0" SelectedDate="{Binding Data_creacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
+                        <DatePicker Margin="30,0,0,0" SelectedDate="{Binding Data_finalitzacio}" SelectedDateFormat="Short" IsEnabled="False" Width="100" HorizontalAlignment="Left"></DatePicker>
+                        <TextBlock TextWrapping="Wrap" Margin="30,0,0,0" Text="{Binding Responsable,StringFormat='Resp: {0}'}"></TextBlock>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -152,6 +157,8 @@
                         </Grid>
 
                     </StackPanel>
+                        <Border Height="{Binding ActualHeight,ElementName=StckPnlDone}" Grid.Column="0" Margin="0,0,0,0"  CornerRadius="10"  Background="{Binding Prioritat}" BorderThickness="3"></Border>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
