@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
-        Title="Window1" MinHeight="310" MinWidth="400" Height="340" Width="600">
+        Title="Window1" MinHeight="310" MinWidth="400" Height="400" Width="600">
 
     <Grid Margin="25">
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
@@ -26,32 +27,32 @@
         <Label Name="lbl_nom_tasca" VerticalAlignment="Center" Content="Nom:" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <TextBox Name="nom_tasca" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
         <Label Name="lbl_descripcio" VerticalAlignment="Center" Content="Descripció:" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <TextBox Name="descripcio" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
-        <Label Name="lbl_data_de_creacio" VerticalAlignment="Center" Content="Data de creació:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <DatePicker Name="data_de_creacio" SelectedDateFormat="Short" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" Focusable="False"/>
+        <TextBox TextWrapping="Wrap" Name="descripcio" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="5,5,5,5"/>
+        <Label Name="lbl_data_de_creacio" VerticalAlignment="Center" Content="Data de creació:" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <DatePicker Name="data_de_creacio" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" Focusable="False"/>
 
-        <Label Name="lbl_data_prevista_de_finalitzacio" VerticalAlignment="Center" Content="Data de finalització:" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
-        <DatePicker Name="data_prevista_de_finalitzacio" SelectedDateFormat="Short" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" Focusable="False"/>
+        <Label Name="lbl_data_prevista_de_finalitzacio" VerticalAlignment="Center" Content="Data de finalització:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <DatePicker Name="data_prevista_de_finalitzacio" SelectedDateFormat="Short" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" Focusable="False"/>
 
-        <Label Name="lbl_responsable" VerticalAlignment="Center" Content="Responsable:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <Label Name="lbl_responsable" VerticalAlignment="Center" Content="Responsable:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
         <Button Name="ID_Binding" Visibility="Hidden" Content="{Binding ID}"></Button>
         <Button Name="Responsable_Binding" Visibility="Hidden" Content="{Binding Responsable}"></Button>
 
-        <ComboBox Name="Responsable_Bindingg" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" ItemsSource="{Binding Responsable}" SelectedValuePath="Id"/>
+        <ComboBox Name="Responsable_Bindingg" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" ItemsSource="{Binding Responsable}" SelectedValuePath="Id"/>
 
-        <Label Name="lbl_prioritat" VerticalAlignment="Center" Content="Prioritat:" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
+        <Label Name="lbl_prioritat" VerticalAlignment="Center" Content="Prioritat:" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,166,0"/>
 
 
 
-        <ComboBox Name="prioritata" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" SelectionChanged="prioritata_SelectionChanged">
+        <ComboBox Name="prioritata" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" SelectionChanged="prioritata_SelectionChanged">
             <ComboBoxItem Name="Red" Background="#ffc4c4" BorderBrush="Red" BorderThickness="5,0,0,0" Foreground="Black">Alta</ComboBoxItem>
             <ComboBoxItem Name="Yellow" Background="#fdffc4" BorderBrush="Yellow" BorderThickness="5,0,0,0" Foreground="Black">Mitja</ComboBoxItem>
             <ComboBoxItem Name="Green" Background="#6eff70" BorderBrush="Green" BorderThickness="5,0,0,0" Foreground="Black">Baix</ComboBoxItem>
 
         </ComboBox>
 
-        <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="6" Grid.Column="0" Margin="5,5,5,5" Click="Button_Cancelar_Click" IsCancel="True"/>
-        <Button Name="btn_eliminar" Content="Eliminar" Grid.Row="6" Grid.Column="1" Margin="5,5,5,5" Click="btn_eliminar_Click"/>
-        <Button Name="btn_guardar" Content="Guardar" Grid.Row="6" Grid.Column="2" Margin="5,5,5,5" Click="Button_Guardar_Click"/>
+        <Button Name="btn_cancelar" Content="Cancelar"  Grid.Row="7" Grid.Column="0" Margin="5,5,5,5" Click="Button_Cancelar_Click" IsCancel="True"/>
+        <Button Name="btn_eliminar" Content="Eliminar" Grid.Row="7" Grid.Column="1" Margin="5,5,5,5" Click="btn_eliminar_Click"/>
+        <Button Name="btn_guardar" Content="Guardar" Grid.Row="7" Grid.Column="2" Margin="5,5,5,5" Click="Button_Guardar_Click"/>
     </Grid>
 </Window>
