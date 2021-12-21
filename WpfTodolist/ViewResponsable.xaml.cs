@@ -12,6 +12,9 @@ using System.Windows.Shapes;
 using WpfTodolist.Entity;
 using WpfTodolist.Persistance;
 using WpfTodolist.Service;
+using MongoDB;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace WpfTodolist
 {
@@ -20,17 +23,20 @@ namespace WpfTodolist
     /// </summary>
     public partial class ViewResponsable : Window
     {
+        ResponsableService rs = new ResponsableService();
+        TascaService ts = new TascaService();
+
         public ViewResponsable()
         {
             InitializeComponent();
-            dgUsers.ItemsSource = ResponsableService.GetAll();
+            dgUsers.ItemsSource = rs.GetAll();
         }
 
         private void Crear_usuari_Click(object sender, RoutedEventArgs e)
         {
             ConfiguracioResponsable form = new ConfiguracioResponsable();
             form.ShowDialog();
-            dgUsers.ItemsSource = ResponsableService.GetAll();
+            dgUsers.ItemsSource = rs.GetAll();
         }
 
         private void DeleteUser(object sender, RoutedEventArgs e)
@@ -40,8 +46,13 @@ namespace WpfTodolist
                 try
                 {
                     Responsable oUser = (Responsable)dgUsers.SelectedItem;
-                    ResponsableService.Delete(oUser.Id);
-                    dgUsers.ItemsSource = ResponsableService.GetAll();
+                    var llista_tasques = ts.GetAll(oUser.Id);
+                    foreach (Tasca tasca in llista_tasques)
+                    {
+                        ts.Delete(tasca.Id);
+                    }
+                    rs.Delete(oUser.Id);
+                    dgUsers.ItemsSource = rs.GetAll();
                 }
                 catch (Exception ex)
                 {
@@ -54,9 +65,9 @@ namespace WpfTodolist
         private void EditUser(object sender, RoutedEventArgs e)
         {
             Button boto = (Button)sender;
-            ConfiguracioResponsable form = new ConfiguracioResponsable(boto.Tag.ToString());
+            ConfiguracioResponsable form = new ConfiguracioResponsable(new ObjectId(boto.Tag.ToString()));
             form.ShowDialog();
-            dgUsers.ItemsSource = ResponsableService.GetAll();
+            dgUsers.ItemsSource = rs.GetAll();
         }
         private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
         {

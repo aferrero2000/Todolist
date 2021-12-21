@@ -4,78 +4,81 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using MongoDB;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace WpfTodolist.Service
 {
+
     public class PrioritatService
     {
-        public static IEnumerable<Prioritat> GetAll()
+        readonly IMongoCollection<Prioritat> prioritats = DbContext.GetInstance().GetCollection<Prioritat>("Prioritat");
+
+        /// <summary>
+        /// Obté totes les prioritats
+        /// </summary>
+        /// <returns>Llista de prioritats</returns>
+        public List<Prioritat> GetAll()
         {
-            var result = new List<Prioritat>();
-
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "SELECT * FROM Prioritat";
-
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result.Add(new Prioritat
-                            {
-                                Color = reader["Color"].ToString(),
-                                Nom = reader["Nom"].ToString()
-                            });
-                        }
-                    }
-                }
-            }
-
-
-            return result;
+            return prioritats.AsQueryable<Prioritat>().ToList();
         }
 
-        public static Prioritat GetOne(string color)
+        /// <summary>
+        /// Obté una prioritat
+        /// </summary>
+        /// <param name="Id">Codi de prioritat que es vol obtenir</param>
+        /// <returns>La entitat prioritat trobada</returns>
+        public Prioritat GetOne(ObjectId Id)
         {
-            var result = new Prioritat();
-
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "SELECT * FROM Prioritat WHERE color = ?";
-
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("color", color));
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result.Color = reader["color"].ToString();
-                            result.Nom = reader["nom"].ToString();
-                        }
-                    }
-                }
-            }
-
-            return result;
+            return prioritats.Find(p => p.Id == Id).First<Prioritat>();
         }
 
-        public static void SetOne(Prioritat prioritat)
+        /// <summary>
+        /// Obté una prioritat
+        /// </summary>
+        /// <param name="Id">Nom de prioritat que es vol obtenir</param>
+        /// <returns>La entitat prioritat trobada</returns>
+        public Prioritat GetOne(string color)
         {
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "INSERT INTO Prioritat (nom, color) VALUES (?, ?)";
+            return prioritats.Find(p => p.Color == color).First<Prioritat>();
+        }
 
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("nom", prioritat.Nom));
-                    command.Parameters.Add(new SQLiteParameter("color", prioritat.Color));
+        /// <summary>
+        /// Afegeix una nova prioritat a la base de dades
+        /// </summary>
+        /// <param name="tasca">Entitat prioritat</param>
+        /// <returns>El número de prioritats afegits</returns>
+        public int Add(Prioritat prioritat)
+        {
+            prioritats.InsertOne(prioritat);
 
-                    command.ExecuteNonQuery();
-                }
-            }
+            return 1;
+        }
+
+        /// <summary>
+        /// Actualitza una prioritat
+        /// </summary>
+        /// <param name="prioritat">Entitat prioritat que es vol modificar</param>
+        /// <returns>El número de prioritats modificades</returns>
+        public long Update(Prioritat prioritat)
+        {
+            var filter = Builders<Prioritat>.Filter.Eq(p => p.Id, prioritat.Id);
+            var result = prioritats.ReplaceOne(filter, prioritat);
+
+            return result.MatchedCount;
+        }
+
+        /// <summary>
+        /// Elimina una prioritat
+        /// </summary>
+        /// <param name="Id">Codi de prioritat que es vol eliminar</param>
+        /// <returns>El número de prioritats eliminades</returns>
+        public long Delete(ObjectId Id)
+        {
+            var result = prioritats.DeleteOne(p => p.Id == Id);
+
+            return result.DeletedCount;
         }
     }
 }

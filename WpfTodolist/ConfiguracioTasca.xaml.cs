@@ -14,6 +14,9 @@ using WpfTodolist.Service;
 using WpfTodolist.Entity;
 using System.Diagnostics;
 using System.Globalization;
+using MongoDB;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace WpfTodolist
 {
@@ -23,6 +26,9 @@ namespace WpfTodolist
     public partial class Window1 : Window
     {
         bool novatasca;
+        TascaService ts = new TascaService();
+        PrioritatService ps = new PrioritatService();
+        ResponsableService rs = new ResponsableService();
         public Window1()
         {
             novatasca = true;
@@ -31,57 +37,31 @@ namespace WpfTodolist
             data_de_creacio.SelectedDate = DateTime.Today;
             data_prevista_de_finalitzacio.SelectedDate = DateTime.Today.AddDays(+7);
 
-            IEnumerable<Responsable> ResponsableList = ResponsableService.GetAll();
+            IEnumerable<Responsable> ResponsableList = rs.GetAll();
             foreach (Responsable person in ResponsableList)
             {
                 if (!Responsable_Bindingg.Items.Contains(person.Id))
                 {
-                    Responsable_Bindingg.Items.Add(person.Id.ToString() + ". " + person.Nom);
+                    Responsable_Bindingg.Items.Add(person.Nom);
                 }
             }
 
-            btn_eliminar.Visibility = System.Windows.Visibility.Hidden;
+            btn_eliminar.Visibility = Visibility.Hidden;
         }
 
-        public Window1(String ID)
+        public Window1(ObjectId ID)
         {
             novatasca = false;
             InitializeComponent();
 
-            Tasca tasca = TascaService.GetOne(Convert.ToInt32(ID));
-            Responsable responsable = ResponsableService.GetOne(Convert.ToInt32(tasca.Responsable));
+            Tasca tasca = ts.GetOne(ID);
+            Responsable responsable = rs.GetOne(tasca.Responsable);
             nom_tasca.Text = tasca.Nom;
             descripcio.Text = tasca.Descripcio;
             data_de_creacio.SelectedDate = tasca.Data_creacio;
             data_prevista_de_finalitzacio.SelectedDate = tasca.Data_finalitzacio;
-
-            IEnumerable<Responsable> ResponsableList = ResponsableService.GetAll();
-            List<int> ResponsableListId = new List<int>();
-            foreach (Responsable person in ResponsableList)
-            {
-                if (!Responsable_Bindingg.Items.Contains(person.Id))
-                {
-                    Responsable_Bindingg.Items.Add(person.Id.ToString() + ". " + person.Nom);
-                    ResponsableListId.Add(person.Id);
-                }
-            }
-
-            int i = 0;
-            while (Responsable_Bindingg.SelectedIndex != i && i != ResponsableListId.Count)
-            {
-                if (ResponsableListId[i] == tasca.Responsable)
-                {
-                    Responsable_Bindingg.SelectedIndex = i;
-                }
-                else
-                {
-                    i++;
-                }
-            }
-
-
-
-            switch (tasca.Prioritat)
+            Prioritat prioritat = ps.GetOne(tasca.Prioritat);
+            switch (prioritat.Color)
             {
                 case "Red":
                     prioritata.SelectedIndex = 0;
@@ -94,7 +74,14 @@ namespace WpfTodolist
                     break;
             }
             ID_Binding.Content = ID;
-            Responsable_Binding.Content = tasca.Responsable.ToString();
+            IEnumerable<Responsable> ResponsableList = rs.GetAll();
+            foreach (Responsable person in ResponsableList)
+            {
+                if (!Responsable_Bindingg.Items.Contains(person.Id))
+                {
+                    Responsable_Bindingg.Items.Add(person.Nom + ' ' + person.Cognom);
+                }
+            }
 
         }
         private void Button_Guardar_Click(object sender, RoutedEventArgs e)
@@ -124,13 +111,7 @@ namespace WpfTodolist
             if (dadesperdeterminar == "Has de determinar:")
             {
                 Tasca tasca = new Tasca();
-
-                IEnumerable<Responsable> ResponsableList = ResponsableService.GetAll();
-                List<int> ResponsableListId = new List<int>();
-                foreach (Responsable person in ResponsableList)
-                {
-                    ResponsableListId.Add(person.Id);
-                }
+                Responsable responsable = new Responsable();
 
                 tasca.Nom = nom_tasca.Text;
                 tasca.Descripcio = descripcio.Text;
@@ -138,31 +119,41 @@ namespace WpfTodolist
                 tasca.Data_creacio = datacreacio;
                 DateTime datafinal = DateTime.ParseExact(data_prevista_de_finalitzacio.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
                 tasca.Data_finalitzacio = datafinal;
-
+                responsable.Nom = Responsable_Bindingg.SelectedItem.ToString();
+                Prioritat prioritat;
                 switch (prioritata.SelectedIndex)
                 {
                     case 0:
-                        tasca.Prioritat = "Red";
+                        prioritat = ps.GetOne("Red");
+                        tasca.Prioritat = prioritat.Id;
                         break;
                     case 1:
-                        tasca.Prioritat = "Yellow";
+                        prioritat = ps.GetOne("Yellow");
+                        tasca.Prioritat = prioritat.Id;
                         break;
                     case 2:
-                        tasca.Prioritat = "Green";
+                        prioritat = ps.GetOne("Green");
+                        tasca.Prioritat = prioritat.Id;
                         break;
                 }
 
                 if (novatasca)
                 {
                     tasca.Estat = "ToDo";
-                    tasca.Responsable = ResponsableListId[Responsable_Bindingg.SelectedIndex];
-                    TascaService.SetOne(tasca);
+                    rs.Add(responsable);
+                    Responsable temp = rs.GetOne(responsable.Id);
+                    tasca.Responsable = temp.Id;
+                    ts.Add(tasca);
                 }
                 else
                 {
-                    tasca.Responsable = ResponsableListId[Responsable_Bindingg.SelectedIndex];
-                    tasca.Id = Convert.ToInt32(ID_Binding.Content);
-                    TascaService.UpdateNoEstat(tasca);
+                    
+                    tasca.Responsable = new ObjectId(Responsable_Binding.Content.ToString());
+                    responsable.Id = tasca.Responsable;
+                    tasca.Id = new ObjectId(ID_Binding.Content.ToString());
+                    tasca.Responsable = new ObjectId(Responsable_Binding.Content.ToString());
+                    rs.Update(responsable);
+                    ts.Update(tasca);
                 }
 
                 Close();
@@ -180,11 +171,8 @@ namespace WpfTodolist
 
         private void btn_eliminar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Segur que vols eliminar aquesta tasca seleccionada (Aquesta acció no es pot desfer)?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                TascaService.Delete(TascaService.GetOne(Convert.ToInt32(ID_Binding.Content)).Id);
-                Close();
-            }
+            ts.Delete(new ObjectId(ID_Binding.Content.ToString()));
+            Close();
         }
 
         private void prioritata_SelectionChanged(object sender, SelectionChangedEventArgs e)

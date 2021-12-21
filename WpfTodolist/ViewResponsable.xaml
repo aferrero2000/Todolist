@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTodolist"
         mc:Ignorable="d"
-        Title="ViewResponsable" Height="450" MinWidth="275" Width="500">
+        Title="ViewResponsable" Height="450" MinWidth="275" >
     <Grid Margin="25" Background="White" RenderTransformOrigin="0.559,0.504">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -13,7 +13,7 @@
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="ola" Width="*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
@@ -22,6 +22,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" MinWidth="30" MaxWidth="30"/>
                 <DataGridTextColumn Header="Nom" IsReadOnly="True" Binding="{Binding Nom}" MinWidth="50" Width="1*"/>
+                <DataGridTextColumn Header="Cognom" IsReadOnly="True" Binding="{Binding Cognom}" MinWidth="50" Width="4*"/>
 
                 <DataGridTemplateColumn Header="Editar" MinWidth="50" MaxWidth="50">
                     <DataGridTemplateColumn.CellTemplate>

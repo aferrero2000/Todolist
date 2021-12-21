@@ -12,6 +12,9 @@ using System.Windows.Shapes;
 using WpfTodolist.Entity;
 using WpfTodolist.Persistance;
 using WpfTodolist.Service;
+using MongoDB;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace WpfTodolist
 {
@@ -20,21 +23,25 @@ namespace WpfTodolist
     /// </summary>
     public partial class ConfiguracioResponsable : Window
     {
-        bool novatasca;
+        bool nouresponsable;
+        
+        TascaService ts = new TascaService();
+        ResponsableService rs = new ResponsableService();
         public ConfiguracioResponsable()
         {
-            novatasca = true;
+            nouresponsable = true;
             InitializeComponent();
         }
 
-        public ConfiguracioResponsable(String ID)
+        public ConfiguracioResponsable(ObjectId ID)
         {
-            novatasca = false;
+            nouresponsable = false;
             InitializeComponent();
 
-            Responsable responsable = ResponsableService.GetOne(Convert.ToInt32(ID));
-            nom_rresponsable.Text = responsable.Nom;
-            cognom_responsable.Text = responsable.Id.ToString();
+            Responsable responsable = rs.GetOne(ID);
+            id_responsable.Text = responsable.Id.ToString();
+            nom_responsable.Text = responsable.Nom;
+            cognom_responsable.Text = responsable.Cognom;
         }
 
 
@@ -42,34 +49,34 @@ namespace WpfTodolist
         {
             Responsable responsable = new Responsable();
 
-            responsable.Nom = nom_rresponsable.Text;
-            //responsable.Id = cognom_responsable.Text;
+            responsable.Nom = nom_responsable.Text;
+            responsable.Cognom = cognom_responsable.Text;
 
             bool dadescompletades;
             dadescompletades = true;
 
-            if (nom_rresponsable.Text.Length == 0)
+            if (nom_responsable.Text.Length == 0)
             {
                 MessageBox.Show("Has d'introduir un nom.");
                 dadescompletades = false;
             }
- /*           else if (cognom_responsable.Text.Length == 0)
+            else if (cognom_responsable.Text.Length == 0)
             {
-                MessageBox.Show("Has d'introduir la descripció.");
+                MessageBox.Show("Has d'introduir el cognom.");
                 dadescompletades = false;
-            }*/
+            }
 
             if (dadescompletades)
             {
 
-                if (novatasca)
+                if (nouresponsable)
                 {
-                    ResponsableService.SetOne(responsable);
+                    rs.Add(responsable);
                 }
                 else
                 {
-                    responsable.Id = Convert.ToInt32(cognom_responsable.Text);
-                    ResponsableService.Update(responsable);
+                    responsable.Id = new ObjectId(id_responsable.Text);
+                    rs.Update(responsable);
                 }
 
                 Close();

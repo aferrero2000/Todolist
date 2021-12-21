@@ -5,34 +5,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
+using MongoDB;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace WpfTodolist.Service
 {
     class Tasca_ResponsableService
     {
-
-        public static Tasca_Responsable GetNomResponsable(Tasca tasca)
+        PrioritatService ps = new PrioritatService();
+        ResponsableService rs = new ResponsableService();
+        public Tasca_Responsable GetNomResponsable(Tasca tasca)
         {
-            var responsable = new Responsable();
-
-            using (var ctx = DbContext.GetInstance())
-            {
-                
-                var query = "SELECT * FROM Responsable WHERE id = ?";
-
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("id", tasca.Responsable));
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if(reader.Read())
-                        {
-                            Debug.WriteLine(reader);
-                            responsable.Nom = reader["Nom"].ToString();
-                        }
-                    }
-                }
-            }
+            Responsable responsable = rs.GetOne(tasca.Responsable);
+            Prioritat prioritat = ps.GetOne(tasca.Prioritat);
 
             var result = new Tasca_Responsable();
             result.Id = tasca.Id;
@@ -40,8 +26,10 @@ namespace WpfTodolist.Service
             result.Descripcio = tasca.Descripcio;
             result.Data_creacio = tasca.Data_creacio;
             result.Data_finalitzacio = tasca.Data_finalitzacio;
+            result.Responsable = tasca.Responsable;
             result.Prioritat = tasca.Prioritat;
-            result.Responsable = responsable.Nom;
+            result.ResponsableText = responsable.Nom + ' ' + responsable.Cognom;
+            result.PrioritatText = prioritat.Color.ToString();
             result.Estat = tasca.Estat;
 
             return result;

@@ -4,130 +4,70 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using MongoDB;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace WpfTodolist.Service
 {
     public class ResponsableService
     {
-        public static IEnumerable<Responsable> GetAll()
+        readonly IMongoCollection<Responsable> responsables = DbContext.GetInstance().GetCollection<Responsable>("Responsable");
+
+        /// <summary>
+        /// Obté tots els responsables
+        /// </summary>
+        /// <returns>Llista de responsables</returns>
+        public List<Responsable> GetAll()
         {
-            var result = new List<Responsable>();
-
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "SELECT * FROM Responsable";
-
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result.Add(new Responsable
-                            { 
-                                Id = Convert.ToInt32(reader["id"].ToString()),
-                                Nom = reader["nom"].ToString()
-                            });
-                        }
-                    }
-                }
-            }
-
-            return result;
+            return responsables.AsQueryable<Responsable>().ToList();
         }
 
-        public static Responsable GetOne(int identificador)
+        /// <summary>
+        /// Obté un responsable
+        /// </summary>
+        /// <param name="Id">Codi de tasca que es vol obtenir</param>
+        /// <returns>La entitat tasca trobada</returns>
+        public Responsable GetOne(ObjectId Id)
         {
-            var result = new Responsable();
-
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "SELECT * FROM Responsable WHERE id = ?";
-
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("id", identificador));
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result.Id = Convert.ToInt32(reader["id"].ToString());
-                            result.Nom = reader["nom"].ToString();
-                        }
-                    }
-                }
-            }
-
-            return result;
+            return responsables.Find(r => r.Id == Id).First<Responsable>();
         }
 
-        public static Responsable GetOne(String identificador)
+        /// <summary>
+        /// Afegeix un nou responsable a la base de dades
+        /// </summary>
+        /// <param name="responsable">Entitat responsable</param>
+        /// <returns>El número de responsables afegits</returns>
+        public int Add(Responsable responsable)
         {
-            var result = new Responsable();
+            responsables.InsertOne(responsable);
 
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "SELECT * FROM Responsable WHERE nom = ?";
-
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("nom", identificador));
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result.Id = Convert.ToInt32(reader["id"].ToString());
-                            result.Nom = reader["nom"].ToString();
-                        }
-                    }
-                }
-            }
-
-            return result;
+            return 1;
         }
 
-        public static void SetOne(Responsable responsable)
+        /// <summary>
+        /// Actualitza una responsable
+        /// </summary>
+        /// <param name="responsable">Entitat responsable que es vol modificar</param>
+        /// <returns>El número de responsables modificats</returns>
+        public long Update(Responsable responsable)
         {
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "INSERT INTO Responsable (nom) VALUES (?)";
+            var filter = Builders<Responsable>.Filter.Eq(r => r.Id, responsable.Id);
+            var result = responsables.ReplaceOne(filter, responsable);
 
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("nom", responsable.Nom));
-
-                    command.ExecuteNonQuery();
-                }
-            }
+            return result.MatchedCount;
         }
 
-        public static void Update(Responsable responsable)
+        /// <summary>
+        /// Elimina un responsable
+        /// </summary>
+        /// <param name="Id">Codi de responsable que es vol eliminar</param>
+        /// <returns>El número de responsables eliminats</returns>
+        public long Delete(ObjectId Id)
         {
-            using (var ctx = DbContext.GetInstance())
-            {
-                string query = "UPDATE Responsable SET nom = ? WHERE id = ?";
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("nom", responsable.Nom));
-                    command.Parameters.Add(new SQLiteParameter("id", responsable.Id));
+            var result = responsables.DeleteOne(r => r.Id == Id);
 
-                    command.ExecuteNonQuery();
-                }
-            }
-
-        }
-
-        public static void Delete(int Id)
-        {
-            using (var ctx = DbContext.GetInstance())
-            {
-                string query = "DELETE FROM Responsable WHERE Id = ?";
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    command.Parameters.Add(new SQLiteParameter("", Id));
-                    command.ExecuteNonQuery();
-                }
-            }
+            return result.DeletedCount;
         }
     }
 }
