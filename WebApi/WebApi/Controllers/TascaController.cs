@@ -20,70 +20,72 @@ namespace WebApi.Controllers
         [HttpGet]
         public List<Tasca> Get()
         {
-            /*
-            UserService objUserService = new UserService();
-            return objUserService.GetAll();
-            */
+
+            TascaService objTascaService = new TascaService();
+            return objTascaService.GetAll();
+            
         }
 
         // GET tasca/responsable/5
+        /*
         [HttpGet("responsable/{ObjectId}")]
         public Tasca Get(ObjectId responsable)
         {
-            /*
-            UserService objUserService = new UserService();
-            return objUserService.GetById(id);
-            */
+            
+            //UserService objUserService = new UserService();
+            //return objUserService.GetById(id);
+            
         }
-
+        
         // GET tasca/Alta (prioritat
         [HttpGet("{estat}")]
         public Tasca Get(string estat)
         {
-            /*
-            UserService objUserService = new UserService();
-            return objUserService.GetById(id);
-            */
+            
+            //UserService objUserService = new UserService();
+            //return objUserService.GetById(id);
+            
         }
-
+        
         // GET tasca/5
         [HttpGet("{ObjectId}")]
         public Tasca Get(ObjectId id)
         {
-            /*
-            UserService objUserService = new UserService();
-            return objUserService.GetById(id);
-            */
+            
+            //UserService objUserService = new UserService();
+            //return objUserService.GetById(id);
+            
         }
-
+        
+     
         // POST tasca
         [HttpPost]
         public void Post([FromBody] Tasca tasca)
         {
-            /*
-            UserService objUserService = new UserService();
-            objUserService.Add(user);
-            */
+            
+            //UserService objUserService = new UserService();
+            //objUserService.Add(user);
+            
         }
 
         // PUT tasca/5
         [HttpPut("{ObjectId}")]
         public void Put(ObjectId id, [FromBody] Tasca tasca)
         {
-            /*
-            UserService objUserService = new UserService();
-            objUserService.Update(user);
-            */
+            
+            //UserService objUserService = new UserService();
+            //objUserService.Update(user);
+            
         }
 
         // DELETE tasca/5
         [HttpDelete("{ObjectId}")]
         public void Delete(ObjectId id)
         {
-            /*
-            UserService objUserService = new UserService();
-            objUserService.Delete(id);
-            */
-        }
+            
+            //UserService objUserService = new UserService();
+            //objUserService.Delete(id);
+            
+        }*/
     }
 }
