@@ -9,7 +9,6 @@ using MongoDB.Driver;
 
 namespace WebApi.Service
 {
-    
     public class TascaService
     {
         Tasca_ResponsableService trs = new Tasca_ResponsableService();
