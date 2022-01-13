@@ -26,6 +26,23 @@ namespace WebApi.Controllers
             
         }
 
+        //GET: tasca estat??
+        [HttpGet("estat/{estat}")]
+        public List<Tasca> Get(string estat)
+        {
+            TascaService objUserService = new TascaService();
+            return objUserService.GetAll(estat);
+        }
+
+        //GET: tasca id??
+        [HttpGet("id/{id}")]
+        public Tasca Get(ObjectId id)
+        {
+            TascaService objUserService = new TascaService();
+            return objUserService.GetOne(id);
+        }
+
+
         // GET tasca/responsable/5
         /*
         [HttpGet("responsable/{ObjectId}")]
