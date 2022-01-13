@@ -42,6 +42,16 @@ namespace WebApi.Controllers
             return objUserService.GetOne(id);
         }
 
+        // POST tasca
+        [HttpPost]
+        public void Post([FromBody] Tasca tasca)
+        {
+
+            TascaService objUserService = new TascaService();
+            objUserService.Add(tasca);
+
+        }
+
 
         // GET tasca/responsable/5
         /*

@@ -54,7 +54,7 @@ namespace WpfTodolist.Service
         {
             return tasques.Find(t => t.Id == Id).First<Tasca>();
         }
-
+        
         /// <summary>
         /// Afegeix una nova tasca a la base de dades
         /// </summary>
