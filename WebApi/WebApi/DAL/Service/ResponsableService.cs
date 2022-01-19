@@ -25,8 +25,8 @@ namespace WebApi.Service
         /// <summary>
         /// Obté un responsable
         /// </summary>
-        /// <param name="Id">Codi de tasca que es vol obtenir</param>
-        /// <returns>La entitat tasca trobada</returns>
+        /// <param name="Id">Codi de responsable que es vol obtenir</param>
+        /// <returns>La entitat responsable trobada</returns>
         public Responsable GetOne(ObjectId Id)
         {
             return responsables.Find(r => r.Id == Id).First<Responsable>();
