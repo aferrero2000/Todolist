@@ -52,6 +52,28 @@ namespace WebApi.Controllers
 
         }
 
+        // GET: Respnsable x Tasca
+        [HttpGet("responsable/{ObjectId}")]
+        public List<Tasca> Gett(ObjectId responsable)
+        {
+
+            TascaService objUserService = new TascaService();
+            return objUserService.GetAll(responsable);
+
+        }
+
+
+
+
+
+        // PUT tasca/5
+        [HttpPut("{id}")]
+        public void Put(ObjectId id, [FromBody] Tasca tasca)
+        {
+            TascaService objtascaService = new TascaService();
+            objtascaService.Update(tasca);
+        }
+
 
         // GET tasca/responsable/5
         /*
@@ -74,27 +96,13 @@ namespace WebApi.Controllers
             
         }
         
-        // GET tasca/5
-        [HttpGet("{ObjectId}")]
-        public Tasca Get(ObjectId id)
-        {
-            
-            //UserService objUserService = new UserService();
-            //return objUserService.GetById(id);
-            
-        }
+
         
      
-        // POST tasca
-        [HttpPost]
-        public void Post([FromBody] Tasca tasca)
-        {
-            
-            //UserService objUserService = new UserService();
-            //objUserService.Add(user);
-            
-        }
 
+
+        [HttpPut("{ObjectId}")]
+        public void
         // PUT tasca/5
         [HttpPut("{ObjectId}")]
         public void Put(ObjectId id, [FromBody] Tasca tasca)
