@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         public List<Tasca> Get()
         {
             TascaService objTascaService = new TascaService();
-            return objTascaService.GetAll()
+            return objTascaService.GetAll();
         }
 
         //GET: tasca estat??
@@ -53,12 +53,12 @@ namespace WebApi.Controllers
         public List<Tasca> Gett(ObjectId responsable)
         {
             TascaService objUserService = new TascaService();
-            return objUserService.GetAll(responsable)
+            return objUserService.GetAll(responsable);
         }
 
         // PUT tasca/5
         [HttpPut("{id}")]
-        public void Put(ObjectId id, [FromBody] Tasca tasca)
+        public void Put([FromRouteAttribute] ObjectId id, [FromBody] Tasca tasca)
         {
             TascaService objtascaService = new TascaService();
             objtascaService.Update(tasca);

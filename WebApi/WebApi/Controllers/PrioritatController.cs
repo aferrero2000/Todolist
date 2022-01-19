@@ -50,7 +50,7 @@ namespace WebApi.Controllers
 
         // PUT prioritat/5
         [HttpPut("{ObjectId}")]
-        public void Put(ObjectId id, [FromBody] Prioritat prioritat)
+        public void Put([FromRouteAttribute] ObjectId id, [FromBodyAttribute] Prioritat prioritat)
         {
             PrioritatService objPrioritatSerice = new PrioritatService();
             objPrioritatSerice.Update(prioritat);

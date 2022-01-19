@@ -42,7 +42,7 @@ namespace WebApi.Controllers
 
         // PUT responsable/5
         [HttpPut("{ObjectId}")]
-        public void Put(ObjectId id, [FromBody] Responsable responsable)
+        public void Put([FromRouteAttribute]ObjectId id, [FromBody] Responsable responsable)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
             objResponsableSerice.Update(responsable);
