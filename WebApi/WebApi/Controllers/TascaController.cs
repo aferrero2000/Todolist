@@ -64,6 +64,13 @@ namespace WebApi.Controllers
             objtascaService.Update(tasca);
         }
 
+        // DELETE responsable/5
+        [HttpDelete("{ObjectId}")]
+        public void Delete(ObjectId id)
+        {
+            TascaService objTascaService = new TascaService();
+            objTascaService.Delete(id);
+        }
 
         // GET tasca/responsable/5
         /*
