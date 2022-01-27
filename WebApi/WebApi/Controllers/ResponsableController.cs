@@ -25,8 +25,8 @@ namespace WebApi.Controllers
         }
 
         // GET responsable/5
-        [HttpGet("{ObjectId}")]
-        public Responsable Get(ObjectId id)
+        [HttpGet("{string}")]
+        public Responsable Get(string id)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
             return objResponsableSerice.GetOne(id);
@@ -41,16 +41,16 @@ namespace WebApi.Controllers
         }
 
         // PUT responsable/5
-        [HttpPut("{ObjectId}")]
-        public void Put([FromRouteAttribute]ObjectId id, [FromBody] Responsable responsable)
+        [HttpPut("{string}")]
+        public void Put([FromRouteAttribute]string id, [FromBody] Responsable responsable)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
             objResponsableSerice.Update(responsable);
         }
 
         // DELETE responsable/5
-        [HttpDelete("{ObjectId}")]
-        public void Delete(ObjectId id)
+        [HttpDelete("{string}")]
+        public void Delete(string id)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
             objResponsableSerice.Delete(id);

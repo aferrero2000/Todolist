@@ -12,7 +12,7 @@ namespace WebApi.Model
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [BsonElement("Nom")]
         public string Nom { get; set; }
         [BsonElement("Cognom")]

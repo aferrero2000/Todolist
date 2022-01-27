@@ -27,7 +27,7 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="Id">Codi de responsable que es vol obtenir</param>
         /// <returns>La entitat responsable trobada</returns>
-        public Responsable GetOne(ObjectId Id)
+        public Responsable GetOne(string Id)
         {
             return responsables.Find(r => r.Id == Id).First<Responsable>();
         }
@@ -62,7 +62,7 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="Id">Codi de responsable que es vol eliminar</param>
         /// <returns>El número de responsables eliminats</returns>
-        public long Delete(ObjectId Id)
+        public long Delete(string Id)
         {
             var result = responsables.DeleteOne(r => r.Id == Id);
 

@@ -11,7 +11,6 @@ namespace WebApi.Service
 {
     public class TascaService
     {
-        Tasca_ResponsableService trs = new Tasca_ResponsableService();
         readonly IMongoCollection<Tasca> tasques = DbContext.GetInstance().GetCollection<Tasca>("Tasca");
 
         /// <summary>
@@ -38,17 +37,17 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="responsable">Atribut responsable que es vol buscar</param>
         /// <returns>Llista de tasques</returns>
-        public List<Tasca> GetAll(ObjectId responsable)
+        /*public List<Tasca> GetAll(string responsable)
         {
             return tasques.Find(t => t.Responsable == responsable).ToList();
-        }
+        }*/
 
         /// <summary>
         /// Obté una tasca
         /// </summary>
         /// <param name="Id">Codi de tasca que es vol obtenir</param>
         /// <returns>La entitat tasca trobada</returns>
-        public Tasca GetOne(ObjectId Id)
+        public Tasca GetOne(string Id)
         {
             return tasques.Find(t => t.Id == Id).First<Tasca>();
         }
@@ -83,26 +82,12 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="Id">Codi de tasca que es vol eliminar</param>
         /// <returns>El número de tasques eliminades</returns>
-        public long Delete(ObjectId Id)
+        public long Delete(string Id)
         {
             var result = tasques.DeleteOne(t => t.Id == Id);
 
             return result.DeletedCount;
         }
 
-        public Tasca Refactor(Tasca_Responsable tasca_responsable)
-        {
-            Tasca result = new Tasca();
-            result.Id = tasca_responsable.Id;
-            result.Nom = tasca_responsable.Nom;
-            result.Descripcio = tasca_responsable.Descripcio;
-            result.Data_creacio = tasca_responsable.Data_creacio;
-            result.Data_finalitzacio = tasca_responsable.Data_finalitzacio;
-            result.Responsable = tasca_responsable.Responsable;
-            result.Prioritat = tasca_responsable.Prioritat;
-            result.Estat = tasca_responsable.Estat;
-
-            return result;
-        }
     }
 }

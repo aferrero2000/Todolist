@@ -12,7 +12,7 @@ namespace WebApi.Model
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [BsonElement("Nom")]
         public string Nom { get; set; }
         [BsonElement("Descripcio")]
@@ -22,9 +22,9 @@ namespace WebApi.Model
         [BsonElement("Data_finalitzacio")]
         public DateTime Data_finalitzacio { get; set; }
         [BsonElement("Responsable")]
-        public int Responsable { get; set; }
+        public string Responsable { get; set; }
         [BsonElement("Prioritat")]
-        public int Prioritat { get; set; }
+        public string Prioritat { get; set; }
         [BsonElement("Estat")]
         public string Estat { get; set; }
     }

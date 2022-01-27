@@ -26,7 +26,7 @@ namespace WebApi.Controllers
 
         // GET prioritat/1
         [HttpGet("id/{id}")]
-        public Prioritat Get(ObjectId id)
+        public Prioritat Get(string id)
         {
             PrioritatService objPrioritatSerice = new PrioritatService();
             return objPrioritatSerice.GetOne(id);
@@ -34,11 +34,11 @@ namespace WebApi.Controllers
 
         // GET prioritat/1
         [HttpGet("color/{color}")]
-        public Prioritat Get(string color)
+        /*public Prioritat Get(string color)
         {
             PrioritatService objPrioritatSerice = new PrioritatService();
             return objPrioritatSerice.GetOne(color);
-        }
+        }*/
 
         // POST prioritat
         [HttpPost]
@@ -49,16 +49,16 @@ namespace WebApi.Controllers
         }
 
         // PUT prioritat/5
-        [HttpPut("{ObjectId}")]
-        public void Put([FromRouteAttribute] ObjectId id, [FromBodyAttribute] Prioritat prioritat)
+        [HttpPut("{string}")]
+        public void Put([FromRouteAttribute] string id, [FromBodyAttribute] Prioritat prioritat)
         {
             PrioritatService objPrioritatSerice = new PrioritatService();
             objPrioritatSerice.Update(prioritat);
         }
 
         // DELETE prioritat/5
-        [HttpDelete("{ObjectId}")]
-        public void Delete(ObjectId id)
+        [HttpDelete("{string}")]
+        public void Delete(string id)
         {
             PrioritatService objPrioritatSerice = new PrioritatService();
             objPrioritatSerice.Delete(id);

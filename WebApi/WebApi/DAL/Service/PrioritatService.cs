@@ -28,7 +28,7 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="Id">Codi de prioritat que es vol obtenir</param>
         /// <returns>La entitat prioritat trobada</returns>
-        public Prioritat GetOne(ObjectId Id)
+        public Prioritat GetOne(string Id)
         {
             return prioritats.Find(p => p.Id == Id).First<Prioritat>();
         }
@@ -38,10 +38,10 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="Id">Nom de prioritat que es vol obtenir</param>
         /// <returns>La entitat prioritat trobada</returns>
-        public Prioritat GetOne(string color)
+        /*public Prioritat GetOne(string color)
         {
             return prioritats.Find(p => p.Color == color).First<Prioritat>();
-        }
+        }*/
 
         /// <summary>
         /// Afegeix una nova prioritat a la base de dades
@@ -73,7 +73,7 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="Id">Codi de prioritat que es vol eliminar</param>
         /// <returns>El número de prioritats eliminades</returns>
-        public long Delete(ObjectId Id)
+        public long Delete(string Id)
         {
             var result = prioritats.DeleteOne(p => p.Id == Id);
 
