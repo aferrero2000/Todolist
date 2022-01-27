@@ -38,10 +38,6 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="Id">Nom de prioritat que es vol obtenir</param>
         /// <returns>La entitat prioritat trobada</returns>
-        /*public Prioritat GetOne(string color)
-        {
-            return prioritats.Find(p => p.Color == color).First<Prioritat>();
-        }*/
 
         /// <summary>
         /// Afegeix una nova prioritat a la base de dades

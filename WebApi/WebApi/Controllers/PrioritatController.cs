@@ -32,14 +32,6 @@ namespace WebApi.Controllers
             return objPrioritatSerice.GetOne(id);
         }
 
-        // GET prioritat/1
-        [HttpGet("color/{color}")]
-        /*public Prioritat Get(string color)
-        {
-            PrioritatService objPrioritatSerice = new PrioritatService();
-            return objPrioritatSerice.GetOne(color);
-        }*/
-
         // POST prioritat
         [HttpPost]
         public void Post([FromBody] Prioritat prioritat)

@@ -33,16 +33,6 @@ namespace WebApi.Service
         }
 
         /// <summary>
-        /// Obté totes les tasques amb un responsable concret
-        /// </summary>
-        /// <param name="responsable">Atribut responsable que es vol buscar</param>
-        /// <returns>Llista de tasques</returns>
-        /*public List<Tasca> GetAll(string responsable)
-        {
-            return tasques.Find(t => t.Responsable == responsable).ToList();
-        }*/
-
-        /// <summary>
         /// Obté una tasca
         /// </summary>
         /// <param name="Id">Codi de tasca que es vol obtenir</param>

@@ -24,21 +24,13 @@ namespace WebApi.Controllers
             return objTascaService.GetAll();
         }
 
-        //GET: tasca estat??
-        [HttpGet("estat/{estat}")]
-        public List<Tasca> Get(string estat)
-        {
-            TascaService objUserService = new TascaService();
-            return objUserService.GetAll(estat);
-        }
-
         //GET: tasca id??
         [HttpGet("id/{id}")]
-        /*public Tasca Get(string id)
+        public Tasca Get(string id)
         {
             TascaService objUserService = new TascaService();
             return objUserService.GetOne(id);
-        }*/
+        }
 
         // POST tasca
         [HttpPost]
@@ -72,52 +64,6 @@ namespace WebApi.Controllers
             objTascaService.Delete(id);
         }
 
-        // GET tasca/responsable/5
-        /*
-        [HttpGet("responsable/{string}")]
-        public Tasca Get(string responsable)
-        {
-            
-            //UserService objUserService = new UserService();
-            //return objUserService.GetById(id);
-            
-        }
         
-        // GET tasca/Alta (prioritat
-        [HttpGet("{estat}")]
-        public Tasca Get(string estat)
-        {
-            
-            //UserService objUserService = new UserService();
-            //return objUserService.GetById(id);
-            
-        }
-        
-
-        
-     
-
-
-        [HttpPut("{string}")]
-        public void
-        // PUT tasca/5
-        [HttpPut("{string}")]
-        public void Put(string id, [FromBody] Tasca tasca)
-        {
-            
-            //UserService objUserService = new UserService();
-            //objUserService.Update(user);
-            
-        }
-
-        // DELETE tasca/5
-        [HttpDelete("{string}")]
-        public void Delete(string id)
-        {
-            
-            //UserService objUserService = new UserService();
-            //objUserService.Delete(id);
-            
-        }*/
     }
 }
