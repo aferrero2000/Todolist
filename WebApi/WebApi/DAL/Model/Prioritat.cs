@@ -11,7 +11,8 @@ namespace WebApi.Model
     public class Prioritat
     {
         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public int Id { get; set; }
         [BsonElement("Color")]
         public string Color { get; set; }
         [BsonElement("Nom")]

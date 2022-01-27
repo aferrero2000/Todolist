@@ -11,7 +11,8 @@ namespace WebApi.Model
     public class Tasca
     {
         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public int Id { get; set; }
         [BsonElement("Nom")]
         public string Nom { get; set; }
         [BsonElement("Descripcio")]
@@ -21,9 +22,9 @@ namespace WebApi.Model
         [BsonElement("Data_finalitzacio")]
         public DateTime Data_finalitzacio { get; set; }
         [BsonElement("Responsable")]
-        public ObjectId Responsable { get; set; }
+        public int Responsable { get; set; }
         [BsonElement("Prioritat")]
-        public ObjectId Prioritat { get; set; }
+        public int Prioritat { get; set; }
         [BsonElement("Estat")]
         public string Estat { get; set; }
     }

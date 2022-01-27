@@ -11,7 +11,8 @@ namespace WebApi.Model
     public class Responsable
     {
         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public int Id { get; set; }
         [BsonElement("Nom")]
         public string Nom { get; set; }
         [BsonElement("Cognom")]
