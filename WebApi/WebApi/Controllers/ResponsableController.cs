@@ -41,11 +41,11 @@ namespace WebApi.Controllers
         }
 
         // PUT responsable/5
-        [HttpPut("{string}")]
-        public void Put([FromRouteAttribute]string id, [FromBody] Responsable responsable)
+        [HttpPut("id/{id}")]
+        public void Put(string id, [FromBody] Responsable responsable)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
-            objResponsableSerice.Update(responsable);
+            objResponsableSerice.Update(responsable, id);
         }
 
         // DELETE responsable/5

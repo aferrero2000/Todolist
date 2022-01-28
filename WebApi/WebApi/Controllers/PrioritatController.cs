@@ -41,12 +41,21 @@ namespace WebApi.Controllers
         }
 
         // PUT prioritat/5
+        [HttpPut("id/{id}")]
+        public void Put(string id, [FromBodyAttribute] Prioritat prioritat)
+        {
+            PrioritatService objPrioritatSerice = new PrioritatService();
+            objPrioritatSerice.Update(prioritat, id);
+        }
+
+        /*
+        // PUT prioritat/5
         [HttpPut("{string}")]
         public void Put([FromRouteAttribute] string id, [FromBodyAttribute] Prioritat prioritat)
         {
             PrioritatService objPrioritatSerice = new PrioritatService();
             objPrioritatSerice.Update(prioritat);
-        }
+        }*/
 
         // DELETE prioritat/5
         [HttpDelete("{string}")]

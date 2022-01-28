@@ -59,9 +59,10 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="tasca">Entitat tasca que es vol modificar</param>
         /// <returns>El número de tasques modificades</returns>
-        public long Update(Tasca tasca)
+        public long Update(Tasca tasca, string id)
         {
-            var filter = Builders<Tasca>.Filter.Eq(r => r.Id, tasca.Id);
+            var filter = Builders<Tasca>.Filter.Eq(r => r.Id, id);
+            tasca.Id = id;
             var result = tasques.ReplaceOne(filter, tasca);
 
             return result.MatchedCount;

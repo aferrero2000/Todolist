@@ -49,11 +49,11 @@ namespace WebApi.Controllers
         }
 
         // PUT tasca/5
-        [HttpPut("{id}")]
-        public void Put([FromRouteAttribute] string id, [FromBody] Tasca tasca)
+        [HttpPut("id/{id}")]
+        public void Put(string id, [FromBody] Tasca tasca)
         {
             TascaService objtascaService = new TascaService();
-            objtascaService.Update(tasca);
+            objtascaService.Update(tasca, id);
         }
 
         // DELETE responsable/5

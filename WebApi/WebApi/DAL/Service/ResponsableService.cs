@@ -30,6 +30,7 @@ namespace WebApi.Service
         public Responsable GetOne(string Id)
         {
             return responsables.Find(r => r.Id == Id).First<Responsable>();
+            
         }
 
         /// <summary>
@@ -49,9 +50,10 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="responsable">Entitat responsable que es vol modificar</param>
         /// <returns>El número de responsables modificats</returns>
-        public long Update(Responsable responsable)
+        public long Update(Responsable responsable, string id)
         {
-            var filter = Builders<Responsable>.Filter.Eq(r => r.Id, responsable.Id);
+            var filter = Builders<Responsable>.Filter.Eq(r => r.Id, id);
+            responsable.Id = id;
             var result = responsables.ReplaceOne(filter, responsable);
 
             return result.MatchedCount;

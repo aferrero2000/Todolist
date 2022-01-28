@@ -56,9 +56,11 @@ namespace WebApi.Service
         /// </summary>
         /// <param name="prioritat">Entitat prioritat que es vol modificar</param>
         /// <returns>El número de prioritats modificades</returns>
-        public long Update(Prioritat prioritat)
+        public long Update(Prioritat prioritat, string id)
         {
-            var filter = Builders<Prioritat>.Filter.Eq(p => p.Id, prioritat.Id);
+
+            var filter = Builders<Prioritat>.Filter.Eq(p => p.Id, id);
+            prioritat.Id = id;
             var result = prioritats.ReplaceOne(filter, prioritat);
 
             return result.MatchedCount;
