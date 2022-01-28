@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         }
 
         // GET: Respnsable x Tasca
-        [HttpGet("responsable/{string}")]
+        [HttpGet("responsable/{id}")]
         public List<Tasca> Gett(string responsable)
         {
             TascaService objUserService = new TascaService();
@@ -49,7 +49,7 @@ namespace WebApi.Controllers
         }
 
         // PUT tasca/5
-        [HttpPut("id/{id}")]
+        [HttpPut("{id}")]
         public void Put(string id, [FromBody] Tasca tasca)
         {
             TascaService objtascaService = new TascaService();
@@ -57,7 +57,7 @@ namespace WebApi.Controllers
         }
 
         // DELETE responsable/5
-        [HttpDelete("{string}")]
+        [HttpDelete("{id}")]
         public void Delete(string id)
         {
             TascaService objTascaService = new TascaService();

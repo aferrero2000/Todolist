@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         }
 
         // PUT responsable/5
-        [HttpPut("id/{id}")]
+        [HttpPut("{id}")]
         public void Put(string id, [FromBody] Responsable responsable)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
@@ -49,7 +49,7 @@ namespace WebApi.Controllers
         }
 
         // DELETE responsable/5
-        [HttpDelete("{string}")]
+        [HttpDelete("{id}")]
         public void Delete(string id)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
