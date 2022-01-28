@@ -47,5 +47,57 @@ namespace WpfTodolist.ApiClient
             }
             return tascas;
         }
+
+        /// <summary>
+        /// Afegeix un nou usuari
+        /// </summary>
+        /// <param name="user">Usuari que volem afegir</param>
+        /// <returns></returns>
+        public async Task AddAsync(Tasca tasca)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició POST al endpoint /users}
+                HttpResponseMessage response = await client.PostAsJsonAsync("id", tasca);
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+        /// <summary>
+        /// Modificar un usuari
+        /// </summary>
+        /// <param name="user">Usuari que volem modificar</param>
+        /// <returns></returns>
+        public async Task UpdateAsync(Tasca tasca)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició PUT al endpoint /users/Id
+                HttpResponseMessage response = await client.PutAsJsonAsync($"Tasca/{tasca.Id}", tasca);
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+        public async Task DeleteAsync(string Id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició DELETE al endpoint /users/Id
+                HttpResponseMessage response = await client.DeleteAsync($"Tasca/{Id}");
+                response.EnsureSuccessStatusCode();
+            }
+        }
     }
 }
