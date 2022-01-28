@@ -25,7 +25,7 @@ namespace WebApi.Controllers
         }
 
         // GET responsable/5
-        [HttpGet("{string}")]
+        [HttpGet("{id}")]
         public Responsable Get(string id)
         {
             ResponsableService objResponsableSerice = new ResponsableService();
