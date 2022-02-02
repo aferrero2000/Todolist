@@ -9,11 +9,11 @@ using WpfTodolist.Entity;
 
 namespace WpfTodolist.ApiClient
 {
-    class TascaApiClient
+    class PrioritatApiClient
     {
         string BaseUri;
 
-        public TascaApiClient()
+        public PrioritatApiClient()
         {
             BaseUri = ConfigurationManager.AppSettings["BaseUri"];
         }
@@ -22,9 +22,9 @@ namespace WpfTodolist.ApiClient
         /// Obté una llista de tots els usuaris de la base de dades
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Tasca>> GetTasquesAsync()
+        public async Task<List<Prioritat>> GetPrioritatsAsync()
         {
-            List<Tasca> tascas = new List<Tasca>();
+            List<Prioritat> prioritats = new List<Prioritat>();
 
             using (var client = new HttpClient())
             {
@@ -33,11 +33,11 @@ namespace WpfTodolist.ApiClient
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició GET al endpoint /tascas}
-                HttpResponseMessage response = await client.GetAsync("tasca");
+                HttpResponseMessage response = await client.GetAsync("prioritat");
                 if (response.IsSuccessStatusCode)
                 {
                     //Obtenim el resultat i el carreguem al objecte llista d'usuaris
-                    tascas = await response.Content.ReadAsAsync<List<Tasca>>();
+                    prioritats = await response.Content.ReadAsAsync<List<Prioritat>>();
                     response.Dispose();
                 }
                 else
@@ -45,7 +45,7 @@ namespace WpfTodolist.ApiClient
                     //TODO: que fer si ha anat malament? retornar null? missatge?
                 }
             }
-            return tascas;
+            return prioritats;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace WpfTodolist.ApiClient
         /// </summary>
         /// <param name="user">Usuari que volem afegir</param>
         /// <returns></returns>
-        public async Task AddAsync(Tasca tasca)
+        public async Task AddAsync(Prioritat prioritat)
         {
             using (var client = new HttpClient())
             {
@@ -62,7 +62,7 @@ namespace WpfTodolist.ApiClient
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició POST al endpoint /users}
-                HttpResponseMessage response = await client.PostAsJsonAsync("id", tasca);
+                HttpResponseMessage response = await client.PostAsJsonAsync("id", prioritat);
                 response.EnsureSuccessStatusCode();
             }
         }
@@ -72,7 +72,7 @@ namespace WpfTodolist.ApiClient
         /// </summary>
         /// <param name="user">Usuari que volem modificar</param>
         /// <returns></returns>
-        public async Task UpdateAsync(Tasca tasca)
+        public async Task UpdateAsync(Prioritat prioritat)
         {
             using (var client = new HttpClient())
             {
@@ -81,7 +81,7 @@ namespace WpfTodolist.ApiClient
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició PUT al endpoint /users/Id
-                HttpResponseMessage response = await client.PutAsJsonAsync($"tasca/{tasca.Id}", tasca);
+                HttpResponseMessage response = await client.PutAsJsonAsync($"tasca/{prioritat.Id}", prioritat);
                 response.EnsureSuccessStatusCode();
             }
         }
@@ -95,7 +95,7 @@ namespace WpfTodolist.ApiClient
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició DELETE al endpoint /users/Id
-                HttpResponseMessage response = await client.DeleteAsync($"tasca/{Id}");
+                HttpResponseMessage response = await client.DeleteAsync($"prioritat/{Id}");
                 response.EnsureSuccessStatusCode();
             }
         }
@@ -105,9 +105,9 @@ namespace WpfTodolist.ApiClient
         /// </summary>
         /// <param name="Id">Codi d'usuari</param>
         /// <returns>Usuari o null si no el troba</returns>
-        public async Task<Tasca> GetUserAsync(int Id)
+        public async Task<Prioritat> GetUserAsync(int Id)
         {
-            Tasca tascas = new Tasca();
+            Prioritat prioritats = new Prioritat();
 
             using (var client = new HttpClient())
             {
@@ -116,18 +116,18 @@ namespace WpfTodolist.ApiClient
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició GET al endpoint /users/{Id}
-                HttpResponseMessage response = await client.GetAsync($"tasca/id/{Id}");
+                HttpResponseMessage response = await client.GetAsync($"prioritat/id/{Id}");
                 if (response.IsSuccessStatusCode)
                 {
                     //Reposta 204 quan no ha trobat dades
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        tascas = null;
+                        prioritats = null;
                     }
                     else
                     {
                         //Obtenim el resultat i el carreguem al Objecte User
-                        tascas = await response.Content.ReadAsAsync<Tasca>();
+                        prioritats = await response.Content.ReadAsAsync<Prioritat>();
                         response.Dispose();
                     }
                 }
@@ -136,7 +136,7 @@ namespace WpfTodolist.ApiClient
                     //TODO: que fer si ha anat malament? retornar null? 
                 }
             }
-            return tascas;
+            return prioritats;
         }
     }
 }
