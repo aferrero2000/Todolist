@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using WpfTodolist.Entity;
-using WpfTodolist.Persistance;
+using WpfTodolist.Api;
 using WpfTodolist.Service;
 using System.Diagnostics;
 using MongoDB;
@@ -17,8 +17,7 @@ namespace WpfTodolist
     /// </summary>
     public partial class MainWindow : Window
     {
-        TascaService ts = new TascaService();
-        ResponsableService rs = new ResponsableService();
+        ApiClient api = new ApiClient();
         Tasca_ResponsableService trs = new Tasca_ResponsableService();
         public MainWindow()
         {
@@ -35,12 +34,12 @@ namespace WpfTodolist
             actualitzarLlistes();
         }
 
-        private void afegir_tasca_Click(object sender, RoutedEventArgs e)
+        private async void afegir_tasca_Click(object sender, RoutedEventArgs e)
         {
-            var llista_responsables = rs.GetAll();
+            List<Responsable> llista_responsables = await api.GetResponsableAsync();
             if (llista_responsables.Count != 0)
             {
-                Window1 form = new Window1();
+                Window1 form = new Window1(llista_responsables);
                 form.ShowDialog();
                 actualitzarLlistes(); 
             }
@@ -59,76 +58,58 @@ namespace WpfTodolist
         }
 
 
-        private void Modificar_Click(object sender, RoutedEventArgs e)
+        private async void Modificar_Click(object sender, RoutedEventArgs e)
         {
             Button boto = (Button)sender;
-            Window1 form = new Window1(new ObjectId(boto.Tag.ToString()));
+            List<Responsable> llista_responsables = await api.GetResponsableAsync();
+            List<Tasca> llista_tasques = await api.GetTasquesAsync();
+            List<Prioritat> llista_prioritats = await api.GetPrioritatsAsync();
+            Window1 form = new Window1(llista_responsables, llista_tasques.Find(t => t.Id.Equals(boto.Tag.ToString())), llista_prioritats);
             form.ShowDialog();
             actualitzarLlistes();
         }
 
         private void todo_next_Click(object sender, RoutedEventArgs e)
         {
-            Tasca tasca = ts.Refactor((Tasca_Responsable)((Button)sender).DataContext);
+            Tasca tasca = new Tasca((Tasca_Responsable)((Button)sender).DataContext);
             tasca.Estat = "Doing";
 
-            ts.Update(tasca);
+            api.UpdateTascaAsync(tasca);
             actualitzarLlistes();
         }
 
         private void doing_previous_Click(object sender, RoutedEventArgs e)
         {
-            Tasca tasca = ts.Refactor((Tasca_Responsable)((Button)sender).DataContext);
+            Tasca tasca = (Tasca)((Button)sender).DataContext;
             tasca.Estat = "ToDo";
 
-            ts.Update(tasca);
+            api.UpdateTascaAsync(tasca);
             actualitzarLlistes();
         }
 
         private void doing_next_Click(object sender, RoutedEventArgs e)
         {
-            Tasca tasca = ts.Refactor((Tasca_Responsable)((Button)sender).DataContext);
+            Tasca tasca = new Tasca((Tasca_Responsable)((Button)sender).DataContext);
             tasca.Estat = "Done";
 
-            ts.Update(tasca);
+            api.UpdateTascaAsync(tasca);
             actualitzarLlistes();
         }
 
         private void done_previous_Click(object sender, RoutedEventArgs e)
         {
-            Tasca tasca = ts.Refactor((Tasca_Responsable)((Button)sender).DataContext);
+            Tasca tasca = new Tasca((Tasca_Responsable)((Button)sender).DataContext);
             tasca.Estat = "Doing";
 
-            ts.Update(tasca);
+            api.UpdateTascaAsync(tasca);
             actualitzarLlistes();
         }
 
-        private void actualitzarLlistes()
+        private async void actualitzarLlistes()
         {
-            List<Tasca_Responsable> itemsToDo = new List<Tasca_Responsable>();
-            IEnumerable<Tasca> toDo = ts.GetAll("ToDo");
-            foreach (Tasca tasca in toDo)
-            {
-                itemsToDo.Add(trs.GetNomResponsable(tasca));
-            }
-            ListToDo.ItemsSource = itemsToDo;
-
-
-            List<Tasca_Responsable> itemsDoing = new List<Tasca_Responsable>();
-            IEnumerable<Tasca> doing = ts.GetAll("Doing");
-            foreach (Tasca tasca in doing)
-            {
-                itemsDoing.Add(trs.GetNomResponsable(tasca));
-            }
-            ListDoing.ItemsSource = itemsDoing;
-
-            List<Tasca_Responsable> itemsDone = new List<Tasca_Responsable>();
-            IEnumerable<Tasca> done = ts.GetAll("Done");
-            foreach (Tasca tasca in done)
-            {
-                itemsDone.Add(trs.GetNomResponsable(tasca));
-            }
-            ListDone.ItemsSource = itemsDone;
+            ListToDo.ItemsSource = await api.GetTasquesEstatAsync("ToDo");
+            ListDoing.ItemsSource = await api.GetTasquesEstatAsync("Doing");
+            ListDone.ItemsSource = await api.GetTasquesEstatAsync("Done");
         }
     }
 }

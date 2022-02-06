@@ -5,16 +5,14 @@ using MongoDB;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System.Threading.Tasks;
 
 namespace WpfTodolist.Entity
 {
     public class Prioritat
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
-        [BsonElement("Color")]
+        public string Id { get; set; }
         public string Color { get; set; }
-        [BsonElement("Nom")]
         public string Nom { get; set; }
     }
 }

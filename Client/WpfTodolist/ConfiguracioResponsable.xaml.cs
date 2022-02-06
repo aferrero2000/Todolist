@@ -10,11 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfTodolist.Entity;
-using WpfTodolist.Persistance;
-using WpfTodolist.Service;
-using MongoDB;
-using MongoDB.Bson;
-using MongoDB.Driver;
+using WpfTodolist.Api;
 
 namespace WpfTodolist
 {
@@ -24,21 +20,21 @@ namespace WpfTodolist
     public partial class ConfiguracioResponsable : Window
     {
         bool nouresponsable;
-        
-        TascaService ts = new TascaService();
-        ResponsableService rs = new ResponsableService();
+
+        ApiClient api = new ApiClient();
         public ConfiguracioResponsable()
         {
             nouresponsable = true;
             InitializeComponent();
         }
 
-        public ConfiguracioResponsable(ObjectId ID)
+        public ConfiguracioResponsable(string ID)
         {
             nouresponsable = false;
             InitializeComponent();
 
-            Responsable responsable = rs.GetOne(ID);
+            List<Responsable> lr = api.GetResponsableAsync().Result;
+            Responsable responsable = lr.Find(r => r.Id.Equals(ID));
             id_responsable.Text = responsable.Id.ToString();
             nom_responsable.Text = responsable.Nom;
             cognom_responsable.Text = responsable.Cognom;
@@ -71,12 +67,12 @@ namespace WpfTodolist
 
                 if (nouresponsable)
                 {
-                    rs.Add(responsable);
+                    api.AddResponsableAsync(responsable);
                 }
                 else
                 {
-                    responsable.Id = new ObjectId(id_responsable.Text);
-                    rs.Update(responsable);
+                    responsable.Id = new string(id_responsable.Text);
+                    api.UpdateResponsableAsync(responsable);
                 }
 
                 Close();
