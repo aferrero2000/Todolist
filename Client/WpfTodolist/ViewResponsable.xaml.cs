@@ -10,8 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfTodolist.Entity;
-using WpfTodolist.Persistance;
-using WpfTodolist.Service;
+using WpfTodolist.Api;
 using MongoDB;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -23,36 +22,36 @@ namespace WpfTodolist
     /// </summary>
     public partial class ViewResponsable : Window
     {
-        ResponsableService rs = new ResponsableService();
-        TascaService ts = new TascaService();
+        ApiClient api = new ApiClient();
 
         public ViewResponsable()
         {
             InitializeComponent();
-            dgUsers.ItemsSource = rs.GetAll();
+            dgUsers.ItemsSource = api.GetResponsableAsync().Result;
         }
 
         private void Crear_usuari_Click(object sender, RoutedEventArgs e)
         {
             ConfiguracioResponsable form = new ConfiguracioResponsable();
             form.ShowDialog();
-            dgUsers.ItemsSource = rs.GetAll();
+            dgUsers.ItemsSource = api.GetResponsableAsync().Result;
         }
 
-        private void DeleteUser(object sender, RoutedEventArgs e)
+        private async void DeleteUser(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Segur que vols eliminar el responsable seleccionat (Aquesta acció no es pot desfer)?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
                     Responsable oUser = (Responsable)dgUsers.SelectedItem;
-                    var llista_tasques = ts.GetAll(oUser.Id);
+                    List<Tasca> llista_tasques =  api.GetTasquesAsync().Result;
+                    llista_tasques.FindAll(t => t.Responsable == oUser.Id);
                     foreach (Tasca tasca in llista_tasques)
                     {
-                        ts.Delete(tasca.Id);
+                        await api.DeleteTascaAsync(tasca.Id);
                     }
-                    rs.Delete(oUser.Id);
-                    dgUsers.ItemsSource = rs.GetAll();
+                    await api.DeleteResponsableAsync(oUser.Id);
+                    dgUsers.ItemsSource = await api.GetResponsableAsync();
                 }
                 catch (Exception ex)
                 {
@@ -65,9 +64,9 @@ namespace WpfTodolist
         private void EditUser(object sender, RoutedEventArgs e)
         {
             Button boto = (Button)sender;
-            ConfiguracioResponsable form = new ConfiguracioResponsable(new ObjectId(boto.Tag.ToString()));
+            ConfiguracioResponsable form = new ConfiguracioResponsable(new string(boto.Tag.ToString()));
             form.ShowDialog();
-            dgUsers.ItemsSource = rs.GetAll();
+            dgUsers.ItemsSource = api.GetResponsableAsync().Result;
         }
         private void Button_Cancelar_Click(object sender, RoutedEventArgs e)
         {
